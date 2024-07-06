@@ -47,7 +47,7 @@ enum Router: Identifiable {
     case .favorite:
       Text("Favorite")
     case .search:
-      Text("Search")
+      Injection.shared.container.resolve(SearchPageView.self)
     case .about:
       ProfilePageView()
     }

@@ -33,4 +33,10 @@ class JSONRepository: MovieRepository {
       .setFailureType(to: Error.self)
       .eraseToAnyPublisher()
   }
+
+  func searchMovies(with query: String) -> AnyPublisher<[MovieDTO], Error> {
+    return Just(StubDataLoader.loadStubMovies())
+      .setFailureType(to: Error.self)
+      .eraseToAnyPublisher()
+  }
 }

@@ -14,7 +14,7 @@ struct ProfilePageView: View {
           .resizable()
           .clipShape(Circle())
           .frame(width: 200, height: 200)
-  
+
         Text("Muhammad Alfiansyah")
           .font(.title)
           .fontWeight(.bold)

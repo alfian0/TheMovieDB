@@ -69,10 +69,23 @@ final class Injection {
       let usecase = resolver.resolve(DetailUseCase.self)!
       return DetailPresenter(usecase: usecase, model: model)
     }
-    
+
     container.register(DetailPageView.self) { (resolver, model: MovieModel) in
       let presenter = resolver.resolve(DetailPresenter.self, argument: model)!
       return DetailPageView(presenter: presenter)
+    }
+
+    // MARK: Search
+    container.register(SearchUseCase.self) { resolver in
+      return SearchInteractor(repository: resolver.resolve(MovieRepository.self)!)
+    }
+
+    container.register(SearchPresenter.self) { resolver in
+      return SearchPresenter(usecase: resolver.resolve(SearchUseCase.self)!)
+    }
+
+    container.register(SearchPageView.self) { resolver in
+      return SearchPageView(presenter: resolver.resolve(SearchPresenter.self)!)
     }
 
     return container

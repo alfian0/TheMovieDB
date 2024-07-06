@@ -29,4 +29,17 @@ class APIRouter {
       self.path = "/movie/\(endpoint.rawValue)"
     }
   }
+
+  struct SearchMovies: Request {
+    typealias ReturnType = ListDTO<MovieDTO>
+    var path: String
+    var queryParams: [String: Any]?
+
+    init(query: String) {
+      self.path = "/search/movie"
+      self.queryParams = [
+        "query": query
+      ]
+    }
+  }
 }

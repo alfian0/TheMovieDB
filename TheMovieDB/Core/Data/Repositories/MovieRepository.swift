@@ -13,6 +13,7 @@ protocol MovieRepository {
   func getTopRatedMovies() -> AnyPublisher<[MovieDTO], Error>
   func getUpcomingMovies() -> AnyPublisher<[MovieDTO], Error>
   func getMovieDetail(id: Int) -> AnyPublisher<MovieDTO, Error>
+  func searchMovies(with query: String) -> AnyPublisher<[MovieDTO], Error>
 }
 
 class MovieRepositoryImpl: MovieRepository {
@@ -42,6 +43,12 @@ class MovieRepositoryImpl: MovieRepository {
 
   func getMovieDetail(id: Int) -> AnyPublisher<MovieDTO, Error> {
     movieService.fetchMovieDetail(id: id)
+      .eraseToAnyPublisher()
+  }
+  
+  func searchMovies(with query: String) -> AnyPublisher<[MovieDTO], Error> {
+    movieService.searchMovies(with: query)
+      .map({ $0.results })
       .eraseToAnyPublisher()
   }
 }
