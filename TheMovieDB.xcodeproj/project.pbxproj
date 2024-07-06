@@ -12,7 +12,6 @@
 		6B23B5E12C38BD1C00661718 /* URLSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B23B5E02C38BD1C00661718 /* URLSessionClient.swift */; };
 		6B23B5E52C38C83400661718 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 6B23B5E42C38C83400661718 /* Swinject */; };
 		6B23B5E72C38C84100661718 /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B23B5E62C38C84100661718 /* Injection.swift */; };
-		6B23B5E92C38CBA500661718 /* Injected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B23B5E82C38CBA500661718 /* Injected.swift */; };
 		6B23B5EB2C38EB6D00661718 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B23B5EA2C38EB6D00661718 /* HomeRouter.swift */; };
 		6B23B5ED2C38FECA00661718 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B23B5EC2C38FECA00661718 /* ContentView.swift */; };
 		6B3249242C3919B400E67ED4 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3249232C3919B400E67ED4 /* Router.swift */; };
@@ -71,7 +70,6 @@
 		6B23B5DE2C38BCE800661718 /* AlamofireClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireClient.swift; sourceTree = "<group>"; };
 		6B23B5E02C38BD1C00661718 /* URLSessionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionClient.swift; sourceTree = "<group>"; };
 		6B23B5E62C38C84100661718 /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injection.swift; sourceTree = "<group>"; };
-		6B23B5E82C38CBA500661718 /* Injected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injected.swift; sourceTree = "<group>"; };
 		6B23B5EA2C38EB6D00661718 /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		6B23B5EC2C38FECA00661718 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6B3249232C3919B400E67ED4 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -152,7 +150,6 @@
 			isa = PBXGroup;
 			children = (
 				6B23B5E62C38C84100661718 /* Injection.swift */,
-				6B23B5E82C38CBA500661718 /* Injected.swift */,
 			);
 			path = DI;
 			sourceTree = "<group>";
@@ -613,7 +610,6 @@
 				6B8213E62C37967A00F940F6 /* DefaultDTOMapper.swift in Sources */,
 				6B3CFC022C36A7330038873E /* Bundle+Extension.swift in Sources */,
 				6B8213E02C37963B00F940F6 /* HTTPHeaderField.swift in Sources */,
-				6B23B5E92C38CBA500661718 /* Injected.swift in Sources */,
 				6B8213E22C37964D00F940F6 /* ContentType.swift in Sources */,
 				6B3CFBF82C369D360038873E /* MovieBackdropCard.swift in Sources */,
 				6B8213E82C37968F00F940F6 /* Request.swift in Sources */,

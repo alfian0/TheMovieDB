@@ -16,12 +16,11 @@ protocol MovieRepository {
 }
 
 class MovieRepositoryImpl: MovieRepository {
-  @Injected private var movieService: MovieService
+  private var movieService: MovieService
 
-// MARK: We dont need this because we use Dependency Container Wrapper
-//  init(movieService: MovieService = MovieServiceImpl()) {
-//    self.movieService = movieService
-//  }
+  init(movieService: MovieService) {
+    self.movieService = movieService
+  }
 
   func getNowPlayingMovies() -> AnyPublisher<[MovieDTO], Error> {
     movieService.fetchNowMovies(from: .nowPlaying)

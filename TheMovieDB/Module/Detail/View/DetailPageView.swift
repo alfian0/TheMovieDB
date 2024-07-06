@@ -79,6 +79,12 @@ struct DetailPageView: View {
     .navigationBarTitleDisplayMode(.inline)
     .ignoresSafeArea()
     .toolbar(.hidden, for: .tabBar)
+    .toolbar {
+      if presenter.isLoading {
+        ProgressView()
+          .tint(.black)
+      }
+    }
     .onAppear {
       presenter.getMovieDetail()
     }
@@ -89,6 +95,8 @@ struct DetailPageView_Previews: PreviewProvider {
   static var previews: some View {
     let model = MovieModelMapper.mapMovieResponseToEntity(input: StubDataLoader.loadStubMovie()!)
     let presenter = Injection.shared.container.resolve(DetailPresenter.self, argument: model)!
-    DetailPageView(presenter: presenter)
+    NavigationView {
+      DetailPageView(presenter: presenter)
+    }
   }
 }

@@ -9,16 +9,13 @@ import Foundation
 import Combine
 
 class DetailPresenter: ObservableObject {
-  @Injected private var usecase: DetailUseCase
+  private var usecase: DetailUseCase
   private var cancellables: Set<AnyCancellable> = []
   @Published var model: MovieModel
+  @Published var isLoading: Bool = true
 
-//  init(usecase: DetailUseCase = DetailInteractor(), model: MovieModel) {
-//    self.usecase = usecase
-//    self.model = model
-//  }
-
-  init(model: MovieModel) {
+  init(usecase: DetailUseCase, model: MovieModel) {
+    self.usecase = usecase
     self.model = model
   }
 
@@ -29,6 +26,7 @@ class DetailPresenter: ObservableObject {
 
       } receiveValue: { [weak self] value in
         self?.model = value
+        self?.isLoading = false
       }
       .store(in: &cancellables)
   }

@@ -43,7 +43,7 @@ enum Router: Identifiable {
   var view: some View {
     switch self {
     case .home:
-      HomePageView()
+      Injection.shared.container.resolve(HomePageView.self)
     case .favorite:
       Text("Favorite")
     case .search:

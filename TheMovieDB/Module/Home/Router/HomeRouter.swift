@@ -14,8 +14,7 @@ enum HomeRouter {
   var view: some View {
     switch self {
     case .detail(let model):
-      let presenter = Injection.shared.container.resolve(DetailPresenter.self, argument: model)!
-      DetailPageView(presenter: presenter)
+      Injection.shared.container.resolve(DetailPageView.self, argument: model)!
     }
   }
 }

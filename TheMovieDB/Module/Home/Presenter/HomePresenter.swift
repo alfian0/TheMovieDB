@@ -10,15 +10,19 @@ import Combine
 import SwiftUI
 
 class HomePresenter: ObservableObject {
-  @Injected private var usecase: HomeUseCase
+  private var usecase: HomeUseCase
   private var cancellables: Set<AnyCancellable> = []
   @Published var nowPlayingMovies: [MovieModel] = []
   @Published var topRatedMovies: [MovieModel] = []
   @Published var upcomingMovies: [MovieModel] = []
+  @Published var isLoading: Bool = true
+  private var nowPlayingIsLoading: Bool = true
+  private var topRatedIsLoading: Bool = true
+  private var upComingIsLoading: Bool = true
 
-//  init(usecase: HomeUseCase = HomeInteractor()) {
-//    self.usecase = usecase
-//  }
+  init(usecase: HomeUseCase) {
+    self.usecase = usecase
+  }
 
   func getNowPlayingMovies() {
     usecase.getNowPlayingMovies()
@@ -26,7 +30,10 @@ class HomePresenter: ObservableObject {
       .sink { _ in
 
       } receiveValue: { [weak self] value in
-        self?.nowPlayingMovies = value
+        guard let `self` = self else { return }
+        self.nowPlayingMovies = value
+        self.nowPlayingIsLoading = false
+        self.isLoading = self.nowPlayingIsLoading && self.topRatedIsLoading && self.upComingIsLoading
       }
       .store(in: &cancellables)
   }
@@ -37,7 +44,10 @@ class HomePresenter: ObservableObject {
       .sink { _ in
 
       } receiveValue: { [weak self] value in
-        self?.topRatedMovies = value
+        guard let `self` = self else { return }
+        self.topRatedMovies = value
+        self.topRatedIsLoading = false
+        self.isLoading = self.nowPlayingIsLoading && self.topRatedIsLoading && self.upComingIsLoading
       }
       .store(in: &cancellables)
   }
@@ -48,7 +58,10 @@ class HomePresenter: ObservableObject {
       .sink { _ in
 
       } receiveValue: { [weak self] value in
-        self?.upcomingMovies = value
+        guard let `self` = self else { return }
+        self.upcomingMovies = value
+        self.upComingIsLoading = false
+        self.isLoading = self.nowPlayingIsLoading && self.topRatedIsLoading && self.upComingIsLoading
       }
       .store(in: &cancellables)
   }

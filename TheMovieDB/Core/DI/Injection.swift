@@ -35,33 +35,44 @@ final class Injection {
       return AuthenticatedHTTPClient()
     }
 
-    container.register(MovieService.self) { _ in
-      return MovieServiceImpl()
+    container.register(MovieService.self) { resolver in
+      return MovieServiceImpl(client: resolver.resolve(HTTPClient.self)!)
     }
 
-    container.register(MovieRepository.self) { _ in
+    container.register(MovieRepository.self) { resolver in
 //      return JSONRepository()
-      return MovieRepositoryImpl()
+      return MovieRepositoryImpl(movieService: resolver.resolve(MovieService.self)!)
     }
 
     // MARK: Home
     // To do: Next we need use child container
-    container.register(HomeUseCase.self) { _ in
-      return HomeInteractor()
+    container.register(HomeUseCase.self) { resolver in
+      return HomeInteractor(repository: resolver.resolve(MovieRepository.self)!)
     }
 
-    container.register(HomePresenter.self) { _ in
-      return HomePresenter()
+    container.register(HomePresenter.self) { resolver in
+      return HomePresenter(usecase: resolver.resolve(HomeUseCase.self)!)
+    }
+
+    container.register(HomePageView.self) { resolver in
+      let presenter = resolver.resolve(HomePresenter.self)!
+      return HomePageView(presenter: presenter)
     }
 
     // MARK: Detail
     // To do: Next we need use child container
-    container.register(DetailUseCase.self) { _ in
-      return DetailInteractor()
+    container.register(DetailUseCase.self) { resolver in
+      return DetailInteractor(repository: resolver.resolve(MovieRepository.self)!)
     }
 
-    container.register(DetailPresenter.self) { _, model in
-      return DetailPresenter(model: model)
+    container.register(DetailPresenter.self) { resolver, model in
+      let usecase = resolver.resolve(DetailUseCase.self)!
+      return DetailPresenter(usecase: usecase, model: model)
+    }
+    
+    container.register(DetailPageView.self) { (resolver, model: MovieModel) in
+      let presenter = resolver.resolve(DetailPresenter.self, argument: model)!
+      return DetailPageView(presenter: presenter)
     }
 
     return container

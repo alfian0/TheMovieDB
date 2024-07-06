@@ -14,17 +14,11 @@ protocol MovieService {
 }
 
 class MovieServiceImpl: MovieService {
-// MARK: Because we use swinject we dont need use initialize to init client
-//  private let client: HTTPClient
-//
-//  init(client: HTTPClient = AlamofireAuthenticatedClient()) {
-//    self.client = client
-//  }
+  private let client: HTTPClient
 
-// MARK: Because we use propertywrapper Injected we dont need to write all of this
-//  private let client: HTTPClient = Injection.shared.container.resolve(HTTPClient.self)!
-
-  @Injected private var client: HTTPClient
+  init(client: HTTPClient) {
+    self.client = client
+  }
 
   func fetchNowMovies(from endpoint: MovieListEndpoint) -> AnyPublisher<APIRouter.Movies.ReturnType, Error> {
     client

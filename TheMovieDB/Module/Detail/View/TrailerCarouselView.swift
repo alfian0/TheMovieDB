@@ -18,7 +18,7 @@ struct TrailerCarouselView: View {
         .fontWeight(.bold)
 
       ScrollView(.horizontal, showsIndicators: false) {
-        HStack {
+        HStack(spacing: 8) {
           ForEach(videos) { video in
             ZStack {
               Rectangle()
@@ -29,16 +29,17 @@ struct TrailerCarouselView: View {
                          placeholder: { ProgressView() },
                          image: { Image(uiImage: $0).resizable() })
               .cornerRadius(8)
-              .aspectRatio(16/9, contentMode: .fit)
             }
             .padding(.leading, video.id == self.videos.first!.id ? 16 : 0)
             .padding(.trailing, video.id == self.videos.last!.id ? 16 : 0)
             .padding(.top, 8)
             .padding(.bottom, 8)
+            .frame(width: 16/9*120)
+            .aspectRatio(16/9, contentMode: .fill)
           }
         }
       }
-      .frame(height: 120)
+      .frame(height: 120+16)
     }
   }
 }

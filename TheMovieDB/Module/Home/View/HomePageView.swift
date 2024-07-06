@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct HomePageView: View {
-  @InjectedObject var presenter: HomePresenter
+  @ObservedObject var presenter: HomePresenter
 
   var body: some View {
     NavigationStack {
@@ -36,8 +36,9 @@ struct HomePageView: View {
         presenter.go(to: .detail(movie))
       })
       .toolbar {
-        Button("About") {
-            print("About tapped!")
+        if presenter.isLoading {
+          ProgressView()
+            .tint(.black)
         }
       }
     }
@@ -46,6 +47,6 @@ struct HomePageView: View {
 
 struct HomePageView_Previews: PreviewProvider {
     static var previews: some View {
-        HomePageView()
+      HomePageView(presenter: Injection.shared.container.resolve(HomePresenter.self)!)
     }
 }

@@ -15,11 +15,11 @@ protocol HomeUseCase {
 }
 
 class HomeInteractor: HomeUseCase {
-  @Injected private var repository: MovieRepository
+  private var repository: MovieRepository
 
-//  init(repository: MovieRepository = MovieRepositoryImpl()) {
-//    self.repository = repository
-//  }
+  init(repository: MovieRepository) {
+    self.repository = repository
+  }
 
   func getNowPlayingMovies() -> AnyPublisher<[MovieModel], Error> {
     return repository.getNowPlayingMovies()

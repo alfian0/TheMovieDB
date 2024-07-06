@@ -13,11 +13,11 @@ protocol DetailUseCase {
 }
 
 class DetailInteractor: DetailUseCase {
-  @Injected private var repository: MovieRepository
+  private var repository: MovieRepository
 
-//  init(repository: MovieRepository = MovieRepositoryImpl()) {
-//    self.repository = repository
-//  }
+  init(repository: MovieRepository) {
+    self.repository = repository
+  }
 
   func getMovieDetail(id: Int) -> AnyPublisher<MovieModel, Error> {
     return repository.getMovieDetail(id: id)
