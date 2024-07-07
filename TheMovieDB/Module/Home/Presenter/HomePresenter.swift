@@ -16,6 +16,8 @@ class HomePresenter: ObservableObject {
   @Published var topRatedMovies: [MovieModel] = []
   @Published var upcomingMovies: [MovieModel] = []
   @Published var isLoading: Bool = true
+  @Published var isError: Bool = false
+  @Published var errorMessage: String?
   private var nowPlayingIsLoading: Bool = true
   private var topRatedIsLoading: Bool = true
   private var upComingIsLoading: Bool = true
@@ -28,8 +30,12 @@ class HomePresenter: ObservableObject {
     usecase.getNowPlayingMovies()
       .subscribe(on: DispatchQueue.global(qos: .background))
       .receive(on: DispatchQueue.main)
-      .sink { _ in
-
+      .sink { completion in
+        if case let .failure(error) = completion {
+          self.isError = true
+          self.isLoading = false
+          self.errorMessage = error.localizedDescription
+        }
       } receiveValue: { [weak self] value in
         guard let `self` = self else { return }
         self.nowPlayingMovies = value
@@ -43,8 +49,12 @@ class HomePresenter: ObservableObject {
     usecase.getTopRatedMovies()
       .subscribe(on: DispatchQueue.global(qos: .background))
       .receive(on: DispatchQueue.main)
-      .sink { _ in
-
+      .sink { completion in
+        if case let .failure(error) = completion {
+          self.isError = true
+          self.isLoading = false
+          self.errorMessage = error.localizedDescription
+        }
       } receiveValue: { [weak self] value in
         guard let `self` = self else { return }
         self.topRatedMovies = value
@@ -58,8 +68,12 @@ class HomePresenter: ObservableObject {
     usecase.getUpcomingMovies()
       .subscribe(on: DispatchQueue.global(qos: .background))
       .receive(on: DispatchQueue.main)
-      .sink { _ in
-
+      .sink { completion in
+        if case let .failure(error) = completion {
+          self.isError = true
+          self.isLoading = false
+          self.errorMessage = error.localizedDescription
+        }
       } receiveValue: { [weak self] value in
         guard let `self` = self else { return }
         self.upcomingMovies = value

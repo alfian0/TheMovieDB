@@ -42,6 +42,12 @@ struct HomePageView: View {
         }
       }
     }
+    .alert(isPresented: $presenter.isError) {
+      Alert(
+        title: Text("Error"),
+        message: Text(presenter.errorMessage ?? "Unknow")
+      )
+    }
   }
 }
 
