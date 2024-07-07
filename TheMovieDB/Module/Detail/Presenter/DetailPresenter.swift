@@ -21,6 +21,7 @@ class DetailPresenter: ObservableObject {
 
   func getMovieDetail() {
     usecase.getMovieDetail(id: model.id)
+      .subscribe(on: DispatchQueue.global(qos: .background))
       .receive(on: DispatchQueue.main)
       .sink { _ in
 

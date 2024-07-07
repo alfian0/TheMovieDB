@@ -26,6 +26,7 @@ class HomePresenter: ObservableObject {
 
   func getNowPlayingMovies() {
     usecase.getNowPlayingMovies()
+      .subscribe(on: DispatchQueue.global(qos: .background))
       .receive(on: DispatchQueue.main)
       .sink { _ in
 
@@ -40,6 +41,7 @@ class HomePresenter: ObservableObject {
 
   func getToRatedMovies() {
     usecase.getTopRatedMovies()
+      .subscribe(on: DispatchQueue.global(qos: .background))
       .receive(on: DispatchQueue.main)
       .sink { _ in
 
@@ -54,6 +56,7 @@ class HomePresenter: ObservableObject {
 
   func getUpcomingMovies() {
     usecase.getUpcomingMovies()
+      .subscribe(on: DispatchQueue.global(qos: .background))
       .receive(on: DispatchQueue.main)
       .sink { _ in
 

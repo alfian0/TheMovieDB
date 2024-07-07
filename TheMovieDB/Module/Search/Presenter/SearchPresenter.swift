@@ -22,6 +22,7 @@ final class SearchPresenter: ObservableObject {
       .filter({ $0.count > 3 || $0.isEmpty })
       .debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
       .flatMap(usecase.searchMovies)
+      .subscribe(on: DispatchQueue.global(qos: .background))
       .receive(on: DispatchQueue.main)
       .sink { _ in
 

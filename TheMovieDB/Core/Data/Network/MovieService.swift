@@ -34,7 +34,7 @@ class MovieServiceImpl: MovieService {
       .tryMap(DefaultDTOMapper.map)
       .eraseToAnyPublisher()
   }
-  
+
   func searchMovies(with query: String) -> AnyPublisher<APIRouter.Movies.ReturnType, Error> {
     client
       .publisher(request: APIRouter.SearchMovies(query: query).asURLRequest()!)
