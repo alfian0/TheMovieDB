@@ -9,14 +9,13 @@ import SwiftUI
 
 struct DetailPageView: View {
   @Environment(\.imageCache) var cache: ImageCache
-  // MARK: Because we use PropertyWrapper in some class we need use @StateObject than ObservedObject
-  @StateObject var presenter: DetailPresenter
+  @ObservedObject var presenter: DetailPresenter
 
   var body: some View {
     ZStack {
       AsyncImage(url: presenter.model.posterURL,
                  cache: cache,
-                 placeholder: { Text("Loading...") },
+                 placeholder: { ProgressView() },
                  image: { Image(uiImage: $0).resizable() })
       .aspectRatio(contentMode: .fit)
       .frame(maxHeight: .infinity, alignment: .top)
@@ -75,16 +74,9 @@ struct DetailPageView: View {
         .padding(.bottom, 16)
       }
     }
-    .navigationTitle(presenter.model.title)
-    .navigationBarTitleDisplayMode(.inline)
-    .ignoresSafeArea()
-    .toolbar(.hidden, for: .tabBar)
-    .toolbar {
-      if presenter.isLoading {
-        ProgressView()
-          .tint(.black)
-      }
-    }
+    .navigationBarTitle(Text(presenter.model.title), displayMode: .inline)
+    .edgesIgnoringSafeArea([.top])
+    .navigationBarItems(trailing: ActivityIndicator(isAnimating: $presenter.isLoading))
     .onAppear {
       presenter.getMovieDetail()
     }

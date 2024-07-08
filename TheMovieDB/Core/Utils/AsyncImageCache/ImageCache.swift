@@ -74,7 +74,7 @@ class ImageLoader: ObservableObject {
 }
 
 struct AsyncImage<Placeholder: View>: View {
-    @StateObject private var loader: ImageLoader
+    @ObservedObject private var loader: ImageLoader
     private let placeholder: Placeholder
     private let image: (UIImage) -> Image
 
@@ -84,7 +84,7 @@ struct AsyncImage<Placeholder: View>: View {
          @ViewBuilder image: @escaping (UIImage) -> Image = Image.init(uiImage:)) {
         self.placeholder = placeholder()
         self.image = image
-        _loader = StateObject(wrappedValue: ImageLoader(url: url, cache: cache))
+        _loader = ObservedObject(wrappedValue: ImageLoader(url: url, cache: cache))
     }
 
     var body: some View {

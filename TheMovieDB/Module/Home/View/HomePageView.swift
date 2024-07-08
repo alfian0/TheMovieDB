@@ -12,7 +12,7 @@ struct HomePageView: View {
   @ObservedObject var presenter: HomePresenter
 
   var body: some View {
-    NavigationStack {
+    NavigationView {
       ScrollView(showsIndicators: false) {
         VStack {
           MoviePosterCalouselView(title: MovieListEndpoint.nowPlaying.description, movies: presenter.nowPlayingMovies)
@@ -31,22 +31,18 @@ struct HomePageView: View {
             }
         }
       }
-      .navigationTitle("The Movie DB")
-      .navigationDestination(for: MovieModel.self, destination: { movie in
-        presenter.go(to: .detail(movie))
-      })
-      .toolbar {
-        if presenter.isLoading {
-          ProgressView()
-            .tint(.black)
-        }
+      .navigationBarTitle("The Movie DB")
+      .navigationBarItems(trailing: ActivityIndicator(isAnimating: $presenter.isLoading))
+//      .navigationDestination(for: MovieModel.self, destination: { movie in
+//        presenter.go(to: .detail(movie))
+//      })
+//    }
+      .alert(isPresented: $presenter.isError) {
+        Alert(
+          title: Text("Error"),
+          message: Text(presenter.errorMessage ?? "Unknow")
+        )
       }
-    }
-    .alert(isPresented: $presenter.isError) {
-      Alert(
-        title: Text("Error"),
-        message: Text(presenter.errorMessage ?? "Unknow")
-      )
     }
   }
 }

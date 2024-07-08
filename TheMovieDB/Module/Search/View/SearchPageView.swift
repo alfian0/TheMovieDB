@@ -8,24 +8,24 @@
 import SwiftUI
 
 struct SearchPageView: View {
-  @StateObject var presenter: SearchPresenter
+  @ObservedObject var presenter: SearchPresenter
 
   var body: some View {
-    NavigationStack {
+    NavigationView {
       List {
         ForEach(presenter.movies) { movie in
-          NavigationLink(value: movie) {
-            Text(movie.title)
-          }
+//          NavigationLink(value: movie) {
+//            Text(movie.title)
+//          }
         }
       }
       .listStyle(.plain)
-      .navigationTitle("Search Movie")
-      .navigationDestination(for: MovieModel.self, destination: { movie in
-        presenter.go(to: .detail(movie))
-      })
+//      .navigationTitle("Search Movie")
+//      .navigationDestination(for: MovieModel.self, destination: { movie in
+//        presenter.go(to: .detail(movie))
+//      })
     }
-    .searchable(text: $presenter.searchText, prompt: "Search Movie")
+//    .searchable(text: $presenter.searchText, prompt: "Search Movie")
   }
 }
 

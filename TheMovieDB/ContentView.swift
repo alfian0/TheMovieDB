@@ -12,7 +12,8 @@ struct ContentView: View {
     TabView {
       ForEach([Router.home, Router.favorite, Router.search, Router.about]) { router in
         router.view.tabItem {
-          Label(router.name, systemImage: router.sytemImage)
+          Image(systemName: router.sytemImage)
+          Text(router.name)
         }
       }
     }

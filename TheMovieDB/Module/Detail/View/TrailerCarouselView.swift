@@ -14,7 +14,7 @@ struct TrailerCarouselView: View {
   var body: some View {
     VStack {
       Text("Trailer")
-        .font(.title2)
+//        .font(.title2)
         .fontWeight(.bold)
 
       ScrollView(.horizontal, showsIndicators: false) {

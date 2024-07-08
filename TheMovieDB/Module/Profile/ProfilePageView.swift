@@ -20,7 +20,7 @@ struct ProfilePageView: View {
           .fontWeight(.bold)
 
         Text("iOS Engineer")
-          .font(.title2)
+//          .font(.title2)
       }
     }
 }
