@@ -33,10 +33,6 @@ struct HomePageView: View {
       }
       .navigationBarTitle("The Movie DB")
       .navigationBarItems(trailing: ActivityIndicator(isAnimating: $presenter.isLoading))
-//      .navigationDestination(for: MovieModel.self, destination: { movie in
-//        presenter.go(to: .detail(movie))
-//      })
-//    }
       .alert(isPresented: $presenter.isError) {
         Alert(
           title: Text("Error"),

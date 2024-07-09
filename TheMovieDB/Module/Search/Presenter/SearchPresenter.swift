@@ -18,18 +18,19 @@ final class SearchPresenter: ObservableObject {
   init(usecase: SearchUseCase) {
     self.usecase = usecase
 
-//    $searchText
-//      .filter({ $0.count > 3 || $0.isEmpty })
-//      .debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
-//      .flatMap(usecase.searchMovies)
-//      .subscribe(on: DispatchQueue.global(qos: .background))
-//      .receive(on: DispatchQueue.main)
-//      .sink { _ in
-//
-//      } receiveValue: { [weak self] value in
-//        self?.movies = value
-//      }
-//      .store(in: &cancellables)
+    $searchText
+      .filter({ $0.count > 3 || $0.isEmpty })
+      .debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
+      .setFailureType(to: Error.self)
+      .flatMap(usecase.searchMovies)
+      .subscribe(on: DispatchQueue.global(qos: .background))
+      .receive(on: DispatchQueue.main)
+      .sink { _ in
+
+      } receiveValue: { [weak self] value in
+        self?.movies = value
+      }
+      .store(in: &cancellables)
   }
 
   func go(to page: HomeRouter) -> some View {

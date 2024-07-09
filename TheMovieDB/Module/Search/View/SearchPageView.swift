@@ -12,20 +12,20 @@ struct SearchPageView: View {
 
   var body: some View {
     NavigationView {
-      List {
-        ForEach(presenter.movies) { movie in
-//          NavigationLink(value: movie) {
-//            Text(movie.title)
-//          }
+      VStack {
+        SearchBar(text: $presenter.searchText)
+        
+        List {
+          ForEach(presenter.movies) { movie in
+            NavigationLink(destination: Injection.shared.container.resolve(DetailPageView.self, argument: movie)) {
+              Text(movie.title)
+            }
+          }
         }
+        .listStyle(.plain)
       }
-      .listStyle(.plain)
-//      .navigationTitle("Search Movie")
-//      .navigationDestination(for: MovieModel.self, destination: { movie in
-//        presenter.go(to: .detail(movie))
-//      })
+      .navigationBarTitle("Search Movie")
     }
-//    .searchable(text: $presenter.searchText, prompt: "Search Movie")
   }
 }
 
