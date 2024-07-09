@@ -6,19 +6,18 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct DetailPageView: View {
-  @Environment(\.imageCache) var cache: ImageCache
   @ObservedObject var presenter: DetailPresenter
 
   var body: some View {
     ZStack {
-      AsyncImage(url: presenter.model.posterURL,
-                 cache: cache,
-                 placeholder: { ProgressView() },
-                 image: { Image(uiImage: $0).resizable() })
-      .aspectRatio(contentMode: .fit)
-      .frame(maxHeight: .infinity, alignment: .top)
+      WebImage(url: presenter.model.posterURL)
+        .resizable()
+        .indicator(.activity)
+        .aspectRatio(contentMode: .fit)
+        .frame(maxHeight: .infinity, alignment: .top)
 
       VStack {
         LinearGradient(colors: [

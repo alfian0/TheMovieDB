@@ -45,7 +45,7 @@ class MovieRepositoryImpl: MovieRepository {
     movieService.fetchMovieDetail(id: id)
       .eraseToAnyPublisher()
   }
-  
+
   func searchMovies(with query: String) -> AnyPublisher<[MovieDTO], Error> {
     movieService.searchMovies(with: query)
       .map({ $0.results })

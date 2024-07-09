@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct MovieBackdropCard: View {
   let movie: MovieModel
-  @Environment(\.imageCache) var cache: ImageCache
 
   var body: some View {
     VStack(alignment: .leading) {
@@ -18,10 +18,9 @@ struct MovieBackdropCard: View {
           .fill(Color.gray.opacity(0.1))
           .cornerRadius(8)
 
-        AsyncImage(url: movie.backdropURL,
-                   cache: cache,
-                   placeholder: { ProgressView() },
-                   image: { Image(uiImage: $0).resizable() })
+        WebImage(url: movie.backdropURL)
+          .resizable()
+          .indicator(.activity)
       }
       .aspectRatio(16/9, contentMode: .fit)
       .cornerRadius(8)

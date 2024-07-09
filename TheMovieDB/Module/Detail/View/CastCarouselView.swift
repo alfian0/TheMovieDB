@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct CastCarouselView: View {
   let casts: [CastModel]
-  @Environment(\.imageCache) var cache: ImageCache
 
   var body: some View {
     VStack {
@@ -21,13 +21,12 @@ struct CastCarouselView: View {
         HStack(alignment: .top, spacing: 16) {
           ForEach(casts) { cast in
             VStack {
-              AsyncImage(url: cast.profileURL,
-                         cache: cache,
-                         placeholder: { ProgressView() },
-                         image: { Image(uiImage: $0).resizable() })
-              .aspectRatio(contentMode: .fill)
-              .frame(width: 64, height: 64)
-              .clipShape(Circle())
+              WebImage(url: cast.profileURL)
+                .resizable()
+                .indicator(.activity)
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 64, height: 64)
+                .clipShape(Circle())
 
               Text(cast.name)
                 .multilineTextAlignment(.center)

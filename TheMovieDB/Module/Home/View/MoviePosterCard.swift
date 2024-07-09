@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct MoviePosterCard: View {
   let movie: MovieModel
-  @Environment(\.imageCache) var cache: ImageCache
 
   var body: some View {
     ZStack {
@@ -17,10 +17,9 @@ struct MoviePosterCard: View {
         .fill(Color.gray.opacity(0.1))
         .cornerRadius(8)
 
-      AsyncImage(url: movie.posterURL,
-                 cache: cache,
-                 placeholder: { ProgressView() },
-                 image: { Image(uiImage: $0) })
+      WebImage(url: movie.posterURL)
+        .resizable()
+        .indicator(.activity)
         .cornerRadius(8)
         .aspectRatio(contentMode: .fit)
         .shadow(radius: 4)

@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct TrailerCarouselView: View {
   let videos: [VideoModel]
-  @Environment(\.imageCache) var cache: ImageCache
 
   var body: some View {
     VStack {
@@ -24,11 +24,10 @@ struct TrailerCarouselView: View {
               Rectangle()
                 .fill(Color.gray.opacity(0.1))
 
-              AsyncImage(url: video.thumbnailURL,
-                         cache: cache,
-                         placeholder: { ProgressView() },
-                         image: { Image(uiImage: $0).resizable() })
-              .cornerRadius(8)
+              WebImage(url: video.thumbnailURL)
+                .resizable()
+                .indicator(.activity)
+                .cornerRadius(8)
             }
             .padding(.leading, video.id == self.videos.first!.id ? 16 : 0)
             .padding(.trailing, video.id == self.videos.last!.id ? 16 : 0)
