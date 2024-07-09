@@ -11,6 +11,7 @@ import SwiftUI
 
 class HomePresenter: ObservableObject {
   private var usecase: HomeUseCase
+  private var coordinator: HomeCoordinator
   private var cancellables: Set<AnyCancellable> = []
   @Published var nowPlayingMovies: [MovieModel] = []
   @Published var topRatedMovies: [MovieModel] = []
@@ -22,8 +23,15 @@ class HomePresenter: ObservableObject {
   private var topRatedIsLoading: Bool = true
   private var upComingIsLoading: Bool = true
 
-  init(usecase: HomeUseCase) {
+  init(usecase: HomeUseCase, coordinator: HomeCoordinator) {
     self.usecase = usecase
+    self.coordinator = coordinator
+  }
+
+  deinit {
+    self.cancellables.forEach { cancellable in
+      cancellable.cancel()
+    }
   }
 
   func getNowPlayingMovies() {
@@ -83,7 +91,7 @@ class HomePresenter: ObservableObject {
       .store(in: &cancellables)
   }
 
-  func go(to page: HomeRouter) -> some View {
-    return page.view
+  func goToDetail(with model: MovieModel) {
+    coordinator.goToDetail(with: model)
   }
 }

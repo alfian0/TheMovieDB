@@ -11,21 +11,22 @@ struct SearchPageView: View {
   @ObservedObject var presenter: SearchPresenter
 
   var body: some View {
-    NavigationView {
+//    ScrollView(showsIndicators: false) {
       VStack {
         SearchBar(text: $presenter.searchText)
-        
+
         List {
           ForEach(presenter.movies) { movie in
-            NavigationLink(destination: Injection.shared.container.resolve(DetailPageView.self, argument: movie)) {
-              Text(movie.title)
+            Text(movie.title)
+            .onTapGesture {
+              presenter.goToDetail(with: movie)
             }
           }
         }
         .listStyle(.plain)
       }
       .navigationBarTitle("Search Movie")
-    }
+//    }
   }
 }
 

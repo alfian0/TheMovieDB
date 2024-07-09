@@ -12,20 +12,32 @@ struct HomePageView: View {
   @ObservedObject var presenter: HomePresenter
 
   var body: some View {
-    NavigationView {
+//    NavigationView {
       ScrollView(showsIndicators: false) {
         VStack {
-          MoviePosterCalouselView(title: MovieListEndpoint.nowPlaying.description, movies: presenter.nowPlayingMovies)
+          MoviePosterCalouselView(
+            title: MovieListEndpoint.nowPlaying.description,
+            movies: presenter.nowPlayingMovies) { movie in
+              presenter.goToDetail(with: movie)
+            }
             .onAppear {
               presenter.getNowPlayingMovies()
             }
 
-          MovieBackdropCarouselView(title: MovieListEndpoint.upcoming.description, movies: presenter.upcomingMovies)
+          MovieBackdropCarouselView(
+            title: MovieListEndpoint.upcoming.description,
+            movies: presenter.upcomingMovies) { movie in
+              presenter.goToDetail(with: movie)
+            }
             .onAppear {
               presenter.getUpcomingMovies()
             }
 
-          MovieBackdropCarouselView(title: MovieListEndpoint.topRated.description, movies: presenter.topRatedMovies)
+          MovieBackdropCarouselView(
+            title: MovieListEndpoint.topRated.description,
+            movies: presenter.topRatedMovies) { movie in
+              presenter.goToDetail(with: movie)
+            }
             .onAppear {
               presenter.getToRatedMovies()
             }
@@ -39,7 +51,7 @@ struct HomePageView: View {
           message: Text(presenter.errorMessage ?? "Unknow")
         )
       }
-    }
+//    }
   }
 }
 

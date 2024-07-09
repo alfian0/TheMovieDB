@@ -19,6 +19,12 @@ class DetailPresenter: ObservableObject {
     self.model = model
   }
 
+  deinit {
+    self.cancellables.forEach { cancellable in
+      cancellable.cancel()
+    }
+  }
+
   func getMovieDetail() {
     usecase.getMovieDetail(id: model.id)
       .subscribe(on: DispatchQueue.global(qos: .background))

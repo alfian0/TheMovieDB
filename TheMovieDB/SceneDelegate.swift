@@ -8,17 +8,18 @@
 import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+  var coordinator: HomeCoordinator?
   var window: UIWindow?
 
   func scene(_ scene: UIScene,
              willConnectTo session: UISceneSession,
              options connectionOptions: UIScene.ConnectionOptions) {
-      print("scene willConnectTo")
-      guard let windowScene = scene as? UIWindowScene else { return }
-      let window = UIWindow(windowScene: windowScene)
-      window.rootViewController = UIHostingController(rootView: ContentView())
-      self.window = window
-      window.makeKeyAndVisible()
+    guard let windowScene = scene as? UIWindowScene else { return }
+    let tabBarController = MainCoordinator()
+    tabBarController.start()
+    let window = UIWindow(windowScene: windowScene)
+    window.rootViewController = tabBarController.tabBarController
+    self.window = window
+    window.makeKeyAndVisible()
   }
 }

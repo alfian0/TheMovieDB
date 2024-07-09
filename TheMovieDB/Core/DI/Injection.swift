@@ -53,12 +53,12 @@ final class Injection {
       return HomeInteractor(repository: resolver.resolve(MovieRepository.self)!)
     }
 
-    container.register(HomePresenter.self) { resolver in
-      return HomePresenter(usecase: resolver.resolve(HomeUseCase.self)!)
+    container.register(HomePresenter.self) { resolver, coordinator in
+      return HomePresenter(usecase: resolver.resolve(HomeUseCase.self)!, coordinator: coordinator)
     }
 
-    container.register(HomePageView.self) { resolver in
-      let presenter = resolver.resolve(HomePresenter.self)!
+    container.register(HomePageView.self) { (resolver, coordinator: HomeCoordinator) in
+      let presenter = resolver.resolve(HomePresenter.self, argument: coordinator)!
       return HomePageView(presenter: presenter)
     }
 
@@ -83,12 +83,13 @@ final class Injection {
       return SearchInteractor(repository: resolver.resolve(MovieRepository.self)!)
     }
 
-    container.register(SearchPresenter.self) { resolver in
-      return SearchPresenter(usecase: resolver.resolve(SearchUseCase.self)!)
+    container.register(SearchPresenter.self) { resolver, coordinator in
+      return SearchPresenter(usecase: resolver.resolve(SearchUseCase.self)!, coordinator: coordinator)
     }
 
-    container.register(SearchPageView.self) { resolver in
-      return SearchPageView(presenter: resolver.resolve(SearchPresenter.self)!)
+    container.register(SearchPageView.self) { (resolver, coordinator: SearchCoordinator) in
+      let presenter = resolver.resolve(SearchPresenter.self, argument: coordinator)!
+      return SearchPageView(presenter: presenter)
     }
 
     return container

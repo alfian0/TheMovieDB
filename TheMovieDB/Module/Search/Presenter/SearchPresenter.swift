@@ -11,12 +11,14 @@ import Combine
 
 final class SearchPresenter: ObservableObject {
   private var usecase: SearchUseCase
+  private var coordinator: SearchCoordinator
   private var cancellables: Set<AnyCancellable> = []
   @Published var searchText: String = ""
   @Published var movies: [MovieModel] = []
 
-  init(usecase: SearchUseCase) {
+  init(usecase: SearchUseCase, coordinator: SearchCoordinator) {
     self.usecase = usecase
+    self.coordinator = coordinator
 
     $searchText
       .filter({ $0.count > 3 || $0.isEmpty })
@@ -33,7 +35,13 @@ final class SearchPresenter: ObservableObject {
       .store(in: &cancellables)
   }
 
-  func go(to page: HomeRouter) -> some View {
-    return page.view
+  deinit {
+    self.cancellables.forEach { cancellable in
+      cancellable.cancel()
+    }
+  }
+
+  func goToDetail(with model: MovieModel) {
+    coordinator.goToDetail(with: model)
   }
 }
