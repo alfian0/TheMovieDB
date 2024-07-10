@@ -94,4 +94,31 @@ class HomePresenter: ObservableObject {
   func goToDetail(with model: MovieModel) {
     coordinator.goToDetail(with: model)
   }
+
+  func addFavorite(with model: MovieModel) {
+    usecase.addFavorite(id: model.id, title: model.title, overview: model.overview)
+      .subscribe(on: DispatchQueue.global(qos: .background))
+      .receive(on: DispatchQueue.main)
+      .sink { completion in
+        if case let .failure(error) = completion {
+          self.isError = true
+          self.isLoading = false
+          self.errorMessage = error.localizedDescription
+        }
+      } receiveValue: { [weak self] value in
+        guard let `self` = self else { return }
+        self.topRatedMovies = self.topRatedMovies.map({ movie in
+          var tempMovie = movie
+          tempMovie.isFavorite = value.contains { $0.id == tempMovie.id }
+          return tempMovie
+        })
+
+        self.upcomingMovies = self.upcomingMovies.map({ movie in
+          var tempMovie = movie
+          tempMovie.isFavorite = value.contains { $0.id == tempMovie.id }
+          return tempMovie
+        })
+      }
+      .store(in: &cancellables)
+  }
 }

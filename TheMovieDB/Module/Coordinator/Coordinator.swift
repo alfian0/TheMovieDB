@@ -38,6 +38,13 @@ final class MainCoordinator {
                                                                    selectedImage: UIImage(systemName: "house.circle.fill"))
     self.childCoordinator.append(homeCoordinator)
 
+    let favoriteCoordinator = FavoriteCoordinator(navigationController: UINavigationController())
+    favoriteCoordinator.start()
+    favoriteCoordinator.navigationController.tabBarItem = UITabBarItem(title: "Favorite",
+                                                                   image: UIImage(systemName: "heart.circle"),
+                                                                   selectedImage: UIImage(systemName: "heart.circle.fill"))
+    self.childCoordinator.append(favoriteCoordinator)
+
     let searchCoordinator = SearchCoordinator(navigationController: UINavigationController())
     searchCoordinator.start()
     searchCoordinator.navigationController.tabBarItem = UITabBarItem(title: "Search",
@@ -54,6 +61,7 @@ final class MainCoordinator {
 
     self.tabBarController.viewControllers = [
       homeCoordinator.navigationController,
+      favoriteCoordinator.navigationController,
       searchCoordinator.navigationController,
       profileCoordinator.navigationController
     ]

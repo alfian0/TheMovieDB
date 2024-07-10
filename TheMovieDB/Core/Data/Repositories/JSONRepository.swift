@@ -39,4 +39,14 @@ class JSONRepository: MovieRepository {
       .setFailureType(to: Error.self)
       .eraseToAnyPublisher()
   }
+
+  func getFavorites() -> AnyPublisher<[FavoriteEntity], Error> {
+    return Fail(error: MovieNetworkError.apiError)
+      .eraseToAnyPublisher()
+  }
+
+  func addFavorite(id: Int, title: String, overview: String) -> AnyPublisher<[FavoriteEntity], Error> {
+    return Fail(error: MovieNetworkError.apiError)
+      .eraseToAnyPublisher()
+  }
 }

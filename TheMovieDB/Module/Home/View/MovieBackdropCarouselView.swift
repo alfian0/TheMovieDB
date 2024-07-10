@@ -11,6 +11,7 @@ struct MovieBackdropCarouselView: View {
   let title: String
   let movies: [MovieModel]
   var didTap: ((MovieModel) -> Void)?
+  var didTapFavorite: ((MovieModel) -> Void)?
 
   var body: some View {
     VStack(alignment: .leading, spacing: 8) {
@@ -22,16 +23,16 @@ struct MovieBackdropCarouselView: View {
       ScrollView(.horizontal, showsIndicators: false) {
         HStack(alignment: .top, spacing: 16) {
           ForEach(self.movies) { movie in
-//            NavigationLink(destination: Injection.shared.container.resolve(DetailPageView.self, argument: movie)) {
-              MovieBackdropCard(movie: movie)
-                .padding(.leading, movie.id == self.movies.first!.id ? 16 : 0)
-                .padding(.trailing, movie.id == self.movies.last!.id ? 16 : 0)
-                .padding(.top, 8)
-                .padding(.bottom, 8)
-                .onTapGesture {
-                  self.didTap?(movie)
-                }
-//            }
+            MovieBackdropCard(movie: movie) {
+              self.didTapFavorite?(movie)
+            }
+            .padding(.leading, movie.id == self.movies.first!.id ? 16 : 0)
+            .padding(.trailing, movie.id == self.movies.last!.id ? 16 : 0)
+            .padding(.top, 8)
+            .padding(.bottom, 8)
+            .onTapGesture {
+              self.didTap?(movie)
+            }
           }
         }
       }

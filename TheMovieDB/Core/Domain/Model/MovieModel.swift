@@ -19,6 +19,7 @@ struct MovieModel: Identifiable, Hashable {
   let releaseDate: String
   let casts: [CastModel]
   let videos: [VideoModel]
+  var isFavorite: Bool
 
   static func == (lhs: MovieModel, rhs: MovieModel) -> Bool {
     return lhs.id == rhs.id

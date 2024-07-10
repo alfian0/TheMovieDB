@@ -26,18 +26,22 @@ struct HomePageView: View {
 
           MovieBackdropCarouselView(
             title: MovieListEndpoint.upcoming.description,
-            movies: presenter.upcomingMovies) { movie in
+            movies: presenter.upcomingMovies, didTap: { movie in
               presenter.goToDetail(with: movie)
-            }
+            }, didTapFavorite: { movie in
+              presenter.addFavorite(with: movie)
+            })
             .onAppear {
               presenter.getUpcomingMovies()
             }
 
           MovieBackdropCarouselView(
             title: MovieListEndpoint.topRated.description,
-            movies: presenter.topRatedMovies) { movie in
+            movies: presenter.topRatedMovies, didTap: { movie in
               presenter.goToDetail(with: movie)
-            }
+            }, didTapFavorite: { movie in
+              presenter.addFavorite(with: movie)
+            })
             .onAppear {
               presenter.getToRatedMovies()
             }

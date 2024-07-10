@@ -7,6 +7,7 @@
 
 import Foundation
 import Swinject
+import CoreData
 
 final class Injection {
   static let shared: Injection = Injection()
@@ -42,9 +43,14 @@ final class Injection {
       return MovieServiceImpl(client: resolver.resolve(HTTPClient.self)!)
     }
 
+    container.register(FavoriteService.self) { _ in
+      return FavoriteServiceImp(with: CoreDataClient(container: NSPersistentContainer(name: "MovieContainer")))
+    }
+
     container.register(MovieRepository.self) { resolver in
 //      return JSONRepository()
-      return MovieRepositoryImpl(movieService: resolver.resolve(MovieService.self)!)
+      return MovieRepositoryImpl(movieService: resolver.resolve(MovieService.self)!,
+                                 favoriteService: resolver.resolve(FavoriteService.self)!)
     }
 
     // MARK: Home
@@ -90,6 +96,20 @@ final class Injection {
     container.register(SearchPageView.self) { (resolver, coordinator: SearchCoordinator) in
       let presenter = resolver.resolve(SearchPresenter.self, argument: coordinator)!
       return SearchPageView(presenter: presenter)
+    }
+
+    // MARK: Favorite
+    container.register(FavoriteUseCase.self) { resolver in
+      return FavoriteInteractor(repository: resolver.resolve(MovieRepository.self)!)
+    }
+
+    container.register(FavoritePresenter.self) { resolver, coordinator in
+      return FavoritePresenter(usecase: resolver.resolve(FavoriteUseCase.self)!, coordinator: coordinator)
+    }
+
+    container.register(FavoritePageView.self) { (resolver, coordinator: FavoriteCoordinator) in
+      let presenter = resolver.resolve(FavoritePresenter.self, argument: coordinator)!
+      return FavoritePageView(presenter: presenter)
     }
 
     return container
