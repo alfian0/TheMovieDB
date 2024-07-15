@@ -29,8 +29,8 @@ final class FavoritePresenter: ObservableObject {
     self.usecase.getFavorites()
       .subscribe(on: DispatchQueue.global(qos: .background))
       .receive(on: DispatchQueue.main)
-      .sink { completion in
-        
+      .sink { _ in
+
       } receiveValue: { [weak self] movies in
         self?.movies = movies
       }

@@ -32,6 +32,6 @@ struct ProgressView: UIViewRepresentable {
   }
 
   func updateUIView(_ uiView: UIActivityIndicatorView, context: Context) {
-    
+
   }
 }

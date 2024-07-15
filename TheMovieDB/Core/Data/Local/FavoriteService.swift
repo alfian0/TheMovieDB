@@ -24,7 +24,7 @@ final class FavoriteServiceImp: FavoriteService {
   func fetchFavorites() -> AnyPublisher<[FavoriteEntity], Error> {
     self.client.fetchRequest(FavoriteEntity.self)
   }
-  
+
   func getFavorite(id: Int) -> AnyPublisher<[FavoriteEntity], Error> {
     self.client.fetchRequest(FavoriteEntity.self, predicate: ["id": id])
   }
