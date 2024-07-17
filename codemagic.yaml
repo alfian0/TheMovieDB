@@ -10,7 +10,7 @@ workflows:
     scripts:
       - name: Run tests
         script: |
-          xcodebuild \
+          xcodebuild clean test \
           -project "$XCODE_PROJECT" \
           -scheme "$XCODE_SCHEME" \
           -sdk iphonesimulator \
