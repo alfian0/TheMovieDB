@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import CoreData
 @testable import TheMovieDB
 
 final class MovieModelMapperTest: XCTestCase {
@@ -43,5 +44,28 @@ final class MovieModelMapperTest: XCTestCase {
     XCTAssertEqual(movieModel.videos.first?.key, "test_key")
     XCTAssertEqual(movieModel.videos.first?.thumbnailURL, URL(string: "https://img.youtube.com/vi/test_key/0.jpg"))
     XCTAssertEqual(movieModel.isFavorite, false)
+  }
+
+  func testMapFavoriteEntityToEntity() {
+    let container = NSPersistentContainer(name: "MovieContainer")
+    let favoriteEntity = FavoriteEntity(context: container.viewContext)
+    favoriteEntity.id = 1
+    favoriteEntity.title = "Favorite Movie"
+    favoriteEntity.overview = "Favorite overview"
+
+    let movieModel = MovieModelMapper.mapFavoriteEntityToEntity(input: favoriteEntity)
+
+    XCTAssertEqual(movieModel.id, 1)
+    XCTAssertEqual(movieModel.title, "Favorite Movie")
+    XCTAssertEqual(movieModel.backdropURL, URL(string: APIConstans.placeholderImageURLString))
+    XCTAssertEqual(movieModel.posterURL, URL(string: APIConstans.placeholderImageURLString))
+    XCTAssertEqual(movieModel.overview, "Favorite overview")
+    XCTAssertEqual(movieModel.rating, "")
+    XCTAssertEqual(movieModel.score, "")
+    XCTAssertEqual(movieModel.duration, "")
+    XCTAssertEqual(movieModel.releaseDate, "")
+    XCTAssertEqual(movieModel.casts.count, 0)
+    XCTAssertEqual(movieModel.videos.count, 0)
+    XCTAssertEqual(movieModel.isFavorite, true)
   }
 }
