@@ -59,15 +59,15 @@ final class DetailInteractorTest: XCTestCase {
   }
 
   private func setupMockURLProtocol(with mockData: Data) {
-      MockURLProtocol.requestHandler = { request in
-          let response = HTTPURLResponse(
-              url: request.url!,
-              statusCode: 200,
-              httpVersion: nil,
-              headerFields: nil
-          )!
-          return (response, mockData)
-      }
+    MockURLProtocol.requestHandler = { request in
+        let response = HTTPURLResponse(
+            url: request.url!,
+            statusCode: 200,
+            httpVersion: nil,
+            headerFields: nil
+        )!
+        return (response, mockData)
+    }
   }
 
   private func createHomeInteractor() -> DetailInteractor {
