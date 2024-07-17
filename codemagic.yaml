@@ -15,7 +15,7 @@ workflows:
           -scheme "$XCODE_SCHEME" \
           -sdk iphonesimulator \
           -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1' \
-          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+          CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO CODE_SIGN_IDENTITY="iPhone Developer: Alfiansyah Nur Cahya Putra (9GE8EQEDQB)" DEVELOPMENT_TEAM="9GE8EQEDQB"
       - name: Build debug app
         script: |
           xcodebuild build -project "$XCODE_PROJECT" \
