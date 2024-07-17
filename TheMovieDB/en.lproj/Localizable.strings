@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  TheMovieDB
+
+  Created by alfian on 17/07/24.
+  
+*/
+"Now Playing" = "Now Playing";
+"Upcoming" = "Upcoming";
+"Top Rated" = "Top Rated";
+"Popular" = "Popular";

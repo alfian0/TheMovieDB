@@ -15,10 +15,10 @@ enum MovieListEndpoint: String {
 
   var description: String {
     switch self {
-    case .nowPlaying: return "Now Playing"
-    case .upcoming: return "Upcoming"
-    case .topRated: return "Top Rated"
-    case .popular: return "Popular"
+    case .nowPlaying: return "Now Playing".localized()
+    case .upcoming: return "Upcoming".localized()
+    case .topRated: return "Top Rated".localized()
+    case .popular: return "Popular".localized()
     }
   }
 }
