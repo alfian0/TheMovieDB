@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import TheMovieDBCore
 
 // MARK: For testing purpose when Backend not done yet
 class JSONRepository: MovieRepository {

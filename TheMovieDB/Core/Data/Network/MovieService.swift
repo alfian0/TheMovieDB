@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import TheMovieDBCore
 
 protocol MovieService {
   func fetchNowMovies(from endpoint: MovieListEndpoint) -> AnyPublisher<APIRouter.Movies.ReturnType, Error>
@@ -23,21 +24,21 @@ class MovieServiceImpl: MovieService {
 
   func fetchNowMovies(from endpoint: MovieListEndpoint) -> AnyPublisher<APIRouter.Movies.ReturnType, Error> {
     client
-      .publisher(request: APIRouter.Movies(endpoint: endpoint).asURLRequest()!)
+      .publisher(request: APIRouter.Movies(endpoint: endpoint).asURLRequest(baseURL: APIConstans.baseURL)!)
       .tryMap(DefaultDTOMapper.map)
       .eraseToAnyPublisher()
   }
 
   func fetchMovieDetail(id: Int) -> AnyPublisher<APIRouter.MovieDetail.ReturnType, Error> {
     client
-      .publisher(request: APIRouter.MovieDetail(id: id).asURLRequest()!)
+      .publisher(request: APIRouter.MovieDetail(id: id).asURLRequest(baseURL: APIConstans.baseURL)!)
       .tryMap(DefaultDTOMapper.map)
       .eraseToAnyPublisher()
   }
 
   func searchMovies(with query: String) -> AnyPublisher<APIRouter.Movies.ReturnType, Error> {
     client
-      .publisher(request: APIRouter.SearchMovies(query: query).asURLRequest()!)
+      .publisher(request: APIRouter.SearchMovies(query: query).asURLRequest(baseURL: APIConstans.baseURL)!)
       .tryMap(DefaultDTOMapper.map)
       .eraseToAnyPublisher()
   }

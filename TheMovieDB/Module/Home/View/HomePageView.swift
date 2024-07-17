@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import TheMovieDBCore
 
 struct HomePageView: View {
   @ObservedObject var presenter: HomePresenter

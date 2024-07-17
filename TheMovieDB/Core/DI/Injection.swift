@@ -8,6 +8,7 @@
 import Foundation
 import Swinject
 import CoreData
+import TheMovieDBCore
 
 final class Injection {
   static let shared: Injection = Injection()
@@ -35,7 +36,7 @@ final class Injection {
       #if FRAMEWORK
       return AlamofireAuthenticatedClient()
       #else
-      return AuthenticatedHTTPClient()
+      return AuthenticatedHTTPClient(apiKey: APIConstans.apiKey)
       #endif
     }
 

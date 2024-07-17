@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import TheMovieDBCore
 
 class APIRouter {
   struct MovieDetail: Request {

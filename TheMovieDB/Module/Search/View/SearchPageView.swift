@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TheMovieDBCore
 
 struct SearchPageView: View {
   @ObservedObject var presenter: SearchPresenter

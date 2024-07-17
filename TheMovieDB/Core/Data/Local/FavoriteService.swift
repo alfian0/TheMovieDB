@@ -5,8 +5,8 @@
 //  Created by alfian on 10/07/24.
 //
 
-import CoreData
 import Combine
+import TheMovieDBCore
 
 protocol FavoriteService {
   func fetchFavorites() -> AnyPublisher<[FavoriteEntity], Error>

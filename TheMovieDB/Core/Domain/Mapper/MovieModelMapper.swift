@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import TheMovieDBCore
 
 final class MovieModelMapper {
   static func mapMovieResponseToEntity(input movieResponse: MovieDTO) -> MovieModel {

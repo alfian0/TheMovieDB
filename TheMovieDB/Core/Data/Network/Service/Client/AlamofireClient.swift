@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import Alamofire
+import TheMovieDBCore
 
 final class AlamofireClient: HTTPClient {
   struct InvalidHTTPResponseError: Error {}

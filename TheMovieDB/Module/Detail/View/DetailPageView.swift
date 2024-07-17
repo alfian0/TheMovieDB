@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import TheMovieDBCore
 
 struct DetailPageView: View {
   @ObservedObject var presenter: DetailPresenter
