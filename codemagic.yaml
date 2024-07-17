@@ -15,6 +15,7 @@ workflows:
           -scheme "$XCODE_SCHEME" \
           -sdk iphonesimulator \
           -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max,OS=16.1' \
+          -allowProvisioningUpdates \
           clean build test CODE_SIGNING_REQUIRED=NO
       - name: Build debug app
         script: |
