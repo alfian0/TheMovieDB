@@ -18,7 +18,6 @@ workflows:
           -scheme "$XCODE_SCHEME" \
           -sdk iphonesimulator \
           -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1'
-          DEVELOPMENT_TEAM= "9GE8EQEDQB"
       - name: Build debug app
         script: |
           xcodebuild build -project "$XCODE_PROJECT" \
