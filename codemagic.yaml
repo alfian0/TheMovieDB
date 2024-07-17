@@ -11,8 +11,6 @@ workflows:
         distribution_type: development
         bundle_identifier: id.alfian.TheMovieDB
     scripts:
-      - name: Set up code signing settings on Xcode project
-        script: xcode-project use-profile
       - name: Run tests
         script: |
           xcodebuild clean test \
