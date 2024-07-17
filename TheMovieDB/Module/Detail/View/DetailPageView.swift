@@ -8,6 +8,7 @@
 import SwiftUI
 import SDWebImageSwiftUI
 import TheMovieDBCore
+import Podcast_App_Design_System
 
 struct DetailPageView: View {
   @ObservedObject var presenter: DetailPresenter
@@ -22,15 +23,16 @@ struct DetailPageView: View {
 
       VStack {
         LinearGradient(colors: [
-                                .white.opacity(0),
-                                .white.opacity(0.5),
-                                .white,
-                                .white
+                                .backgroundDefault.opacity(0),
+                                .backgroundDefault.opacity(0.5),
+                                .backgroundDefault,
+                                .backgroundDefault
         ],
                        startPoint: .top,
                        endPoint: .bottom)
       }
       .frame(maxHeight: .infinity, alignment: .bottom)
+      .edgesIgnoringSafeArea(.all)
 
       ScrollView(showsIndicators: false) {
         VStack {
@@ -41,9 +43,9 @@ struct DetailPageView: View {
 
           VStack {
             Text(presenter.model.title)
-              .font(.title)
-              .fontWeight(.bold)
+              .font(.Display.m)
               .padding(.top, 200)
+              .foregroundColor(.foregroundDefault)
               .multilineTextAlignment(.center)
 
             HStack {
@@ -51,24 +53,58 @@ struct DetailPageView: View {
                 .foregroundColor(.blue)
               Text("·")
               Text(presenter.model.score)
-                .font(.headline)
+                .font(.Label.l)
+                .foregroundColor(.foregroundDefault)
               Text("·")
               Text(presenter.model.duration)
-                .font(.headline)
+                .font(.Label.l)
+                .foregroundColor(.foregroundDefault)
             }
 
             Text(presenter.model.overview)
-              .font(.body)
+              .font(.Paragraph.l)
               .multilineTextAlignment(.center)
+              .foregroundColor(.foregroundDefault)
           }
           .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
 
           if !presenter.model.casts.isEmpty {
-            CastCarouselView(casts: presenter.model.casts)
+            SectionView(axis: .horizontal, title: "Cast", models: presenter.model.casts) { cast in
+              VStack {
+                WebImage(url: cast.profileURL)
+                  .resizable()
+                  .indicator(.activity)
+                  .aspectRatio(contentMode: .fill)
+                  .frame(width: 64, height: 64)
+                  .clipShape(Circle())
+
+                Text(cast.name)
+                  .font(.Label.l)
+                  .foregroundColor(.foregroundDefault)
+                  .multilineTextAlignment(.center)
+                  .lineLimit(2)
+              }
+              .frame(width: 64)
+            }
           }
 
           if !presenter.model.videos.isEmpty {
-            TrailerCarouselView(videos: presenter.model.videos)
+            SectionView(axis: .horizontal, title: "Trailer", models: presenter.model.videos) { video in
+              ZStack {
+                Rectangle()
+                  .fill(Color.gray.opacity(0.1))
+
+                WebImage(url: video.thumbnailURL)
+                  .resizable()
+                  .indicator(.activity)
+                  .cornerRadius(8)
+              }
+              .padding(.top, 8)
+              .padding(.bottom, 8)
+              .frame(width: 16/9*120)
+              .aspectRatio(16/9, contentMode: .fill)
+              .frame(height: 120+16)
+            }
           }
         }
         .padding(.bottom, 16)
@@ -89,6 +125,7 @@ struct DetailPageView_Previews: PreviewProvider {
     let presenter = Injection.shared.container.resolve(DetailPresenter.self, argument: model)!
     NavigationView {
       DetailPageView(presenter: presenter)
+        .preferredColorScheme(.dark)
     }
   }
 }

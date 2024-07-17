@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import Podcast_App_Design_System
 
 struct FavoritePageView: View {
   @ObservedObject var presenter: FavoritePresenter
 
   var body: some View {
-    List {
-      ForEach(presenter.movies) { movie in
+    GridStack(axis: .vertical, models: presenter.movies) { movie in
+      VStack(alignment: .leading) {
         Text(movie.title)
           .font(.headline)
           .foregroundColor(.red)
@@ -20,7 +21,7 @@ struct FavoritePageView: View {
           .lineLimit(3)
       }
     }
-    .listStyle(.plain)
+    .padding(.horizontal, 8)
     .navigationBarTitle("Favorite")
     .onAppear {
       self.presenter.getFavoriteMovies()
@@ -30,6 +31,10 @@ struct FavoritePageView: View {
 
 struct FavoritePageView_Previews: PreviewProvider {
     static var previews: some View {
-      Injection.shared.container.resolve(FavoritePageView.self)
+      let coordinator = FavoriteCoordinator(navigationController: UINavigationController())
+      if let presenter = Injection.shared.container.resolve(FavoritePresenter.self, argument: coordinator) {
+        FavoritePageView(presenter: presenter)
+          .preferredColorScheme(.dark)
+      }
     }
 }
