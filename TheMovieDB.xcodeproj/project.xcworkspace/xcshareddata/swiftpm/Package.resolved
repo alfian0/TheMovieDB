@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "design-system",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/alfian0/Design-System.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "fffbfeb8bb036022cfcf1d346770a650be3cc9a3"
+      }
+    },
+    {
       "identity" : "sdwebimage",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",

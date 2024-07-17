@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import Podcast_App_Design_System
 
 struct MovieBackdropCard: View {
   let movie: MovieModel
@@ -30,13 +31,13 @@ struct MovieBackdropCard: View {
       HStack {
         VStack(alignment: .leading) {
           Text(movie.title)
-            .foregroundColor(.black.opacity(0.6))
+            .foregroundColor(.foregroundDefault)
             .fontWeight(.bold)
           HStack {
             Text(movie.rating)
               .foregroundColor(.blue)
             Text(movie.score)
-              .foregroundColor(.black)
+              .foregroundColor(.foregroundDefault)
           }
         }
         Spacer()
@@ -54,5 +55,6 @@ struct MovieBackdropCard: View {
 struct MovieBackdropCard_Previews: PreviewProvider {
   static var previews: some View {
     MovieBackdropCard(movie: MovieModelMapper.mapMovieResponseToEntity(input: StubDataLoader.loadStubMovie()!))
+      .preferredColorScheme(.dark)
   }
 }
