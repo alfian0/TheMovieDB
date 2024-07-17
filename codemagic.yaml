@@ -11,10 +11,12 @@ workflows:
         distribution_type: development
         bundle_identifier: id.alfian.TheMovieDB
     scripts:
+      - script: keychain initialize
+      - script: keychain add-certificates
+      - script: xcode-project use-profiles
       - name: Run tests
         script: |
           xcodebuild clean test \
-          -allowProvisioningUpdates \
           -project "$XCODE_PROJECT" \
           -scheme "$XCODE_SCHEME" \
           -sdk iphonesimulator \
