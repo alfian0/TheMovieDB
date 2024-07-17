@@ -14,11 +14,11 @@ workflows:
       - name: Run tests
         script: |
           xcodebuild clean test \
+          -allowProvisioningUpdates \
           -project "$XCODE_PROJECT" \
           -scheme "$XCODE_SCHEME" \
           -sdk iphonesimulator \
           -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1'
-          -allowProvisioningUpdates
       - name: Build debug app
         script: |
           xcodebuild build -project "$XCODE_PROJECT" \
