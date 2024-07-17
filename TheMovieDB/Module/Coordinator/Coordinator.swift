@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import Podcast_App_Design_System
 
 protocol Coordinator {
   var childCoordinator: [Coordinator] { get set }
@@ -31,6 +32,9 @@ final class MainCoordinator {
   }()
 
   func start() {
+    NotoSansFont.registerFonts()
+    InterFont.registerFonts()
+
     let homeCoordinator = HomeCoordinator(navigationController: UINavigationController())
     homeCoordinator.start()
     homeCoordinator.navigationController.tabBarItem = UITabBarItem(title: "Home",
