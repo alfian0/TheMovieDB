@@ -5,17 +5,21 @@ workflows:
       xcode: latest
       cocoapods: default
       vars:
-          XCODE_PROJECT: "TheMovieDB.xcodeproj"
-          XCODE_SCHEME: "TheMovieDB"
+        XCODE_PROJECT: "TheMovieDB.xcodeproj"
+        XCODE_SCHEME: "TheMovieDB"
+      ios_signing:
+        distribution_type: development
+        bundle_identifier: id.alfian.TheMovieDB
     scripts:
+      - name: Set up code signing settings on Xcode project
+        script: xcode-project use-profile
       - name: Run tests
         script: |
           xcodebuild clean test \
           -project "$XCODE_PROJECT" \
           -scheme "$XCODE_SCHEME" \
           -sdk iphonesimulator \
-          -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1' \
-          CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO CODE_SIGN_IDENTITY="iPhone Developer: Alfiansyah Nur Cahya Putra (9GE8EQEDQB)" DEVELOPMENT_TEAM="9GE8EQEDQB"
+          -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1'
       - name: Build debug app
         script: |
           xcodebuild build -project "$XCODE_PROJECT" \
