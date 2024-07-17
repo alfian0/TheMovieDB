@@ -6,30 +6,42 @@
 //
 
 import XCTest
+@testable import TheMovieDB
 
-final class MovieService: XCTestCase {
+final class MovieModelMapperTest: XCTestCase {
+  func testMapMovieResponseToEntity() {
+    let movieResponse = MovieDTO(id: 1,
+                                 title: "Test Movie",
+                                 backdropPath: "/test_backdrop.jpg",
+                                 posterPath: "/test_poster.jpg",
+                                 overview: "Test overview",
+                                 voteAverage: 8.5,
+                                 voteCount: 120,
+                                 runtime: 120,
+                                 releaseDate: "2023-06-15",
+                                 casts: CastsDTO(cast: [CastDTO(id: 1, name: "Actor 1", profilePath: "/profile1.jpg")]),
+                                 videos: ListDTO<VideosDTO>(results: [
+                                  VideosDTO(id: "1", site: "YouTube", key: "test_key", type: "Trailer")
+                                 ]))
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+    let movieModel = MovieModelMapper.mapMovieResponseToEntity(input: movieResponse)
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
+    XCTAssertEqual(movieModel.id, 1)
+    XCTAssertEqual(movieModel.title, "Test Movie")
+    XCTAssertEqual(movieModel.backdropURL, URL(string: "https://image.tmdb.org/t/p/w500/test_backdrop.jpg"))
+    XCTAssertEqual(movieModel.posterURL, URL(string: "https://image.tmdb.org/t/p/w500/test_poster.jpg"))
+    XCTAssertEqual(movieModel.overview, "Test overview")
+    XCTAssertEqual(movieModel.rating, "★★★★★★★★")
+    XCTAssertEqual(movieModel.score, "8/10")
+    XCTAssertEqual(movieModel.duration, "2h 0m")
+    XCTAssertEqual(movieModel.releaseDate, "2023")
+    XCTAssertEqual(movieModel.casts.count, 1)
+    XCTAssertEqual(movieModel.casts.first?.name, "Actor 1")
+    XCTAssertEqual(movieModel.casts.first?.profileURL, URL(string: "https://image.tmdb.org/t/p/w500/profile1.jpg"))
+    XCTAssertEqual(movieModel.videos.count, 1)
+    XCTAssertEqual(movieModel.videos.first?.site, "YouTube")
+    XCTAssertEqual(movieModel.videos.first?.key, "test_key")
+    XCTAssertEqual(movieModel.videos.first?.thumbnailURL, URL(string: "https://img.youtube.com/vi/test_key/0.jpg"))
+    XCTAssertEqual(movieModel.isFavorite, false)
+  }
 }

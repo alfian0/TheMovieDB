@@ -54,6 +54,11 @@
 		6BD18AFF2C3D5073001E2E48 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD18AFE2C3D5073001E2E48 /* HomeCoordinator.swift */; };
 		6BD18B052C3D536C001E2E48 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD18B042C3D536C001E2E48 /* ProfileCoordinator.swift */; };
 		6BD18B072C3D58CE001E2E48 /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD18B062C3D58CE001E2E48 /* SearchCoordinator.swift */; };
+		6BD4D68D2C47B56400CCE805 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 6BD4D68C2C47B56400CCE805 /* Alamofire */; };
+		6BD4D68F2C47B56800CCE805 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 6BD4D68E2C47B56800CCE805 /* Swinject */; };
+		6BD4D6912C47B56E00CCE805 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6BD4D6902C47B56E00CCE805 /* SDWebImageSwiftUI */; };
+		6BD4D6932C47B57200CCE805 /* TheMovieDBCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6BD4D6922C47B57200CCE805 /* TheMovieDBCore */; };
+		6BD4D6952C47B57700CCE805 /* Podcast App Design System in Frameworks */ = {isa = PBXBuildFile; productRef = 6BD4D6942C47B57700CCE805 /* Podcast App Design System */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +137,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BD4D6912C47B56E00CCE805 /* SDWebImageSwiftUI in Frameworks */,
+				6BD4D6952C47B57700CCE805 /* Podcast App Design System in Frameworks */,
+				6BD4D68D2C47B56400CCE805 /* Alamofire in Frameworks */,
+				6BD4D6932C47B57200CCE805 /* TheMovieDBCore in Frameworks */,
+				6BD4D68F2C47B56800CCE805 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +265,7 @@
 				6B3CFB9E2C3674C60038873E /* TheMovieDB */,
 				6B3CFBD52C367D2C0038873E /* TheMovieDBTests */,
 				6B3CFB9D2C3674C60038873E /* Products */,
+				6BD4D68B2C47B56400CCE805 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -510,6 +521,13 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		6BD4D68B2C47B56400CCE805 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -553,6 +571,13 @@
 				6B3CFBD92C367D2C0038873E /* PBXTargetDependency */,
 			);
 			name = TheMovieDBTests;
+			packageProductDependencies = (
+				6BD4D68C2C47B56400CCE805 /* Alamofire */,
+				6BD4D68E2C47B56800CCE805 /* Swinject */,
+				6BD4D6902C47B56E00CCE805 /* SDWebImageSwiftUI */,
+				6BD4D6922C47B57200CCE805 /* TheMovieDBCore */,
+				6BD4D6942C47B57700CCE805 /* Podcast App Design System */,
+			);
 			productName = TheMovieDBTests;
 			productReference = 6B3CFBD42C367D2B0038873E /* TheMovieDBTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -829,6 +854,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -945,6 +971,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1152,6 +1179,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1180,6 +1208,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1303,6 +1332,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6BD18AF72C3D1458001E2E48 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		6BD4D68C2C47B56400CCE805 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B23B5DA2C38BA0600661718 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		6BD4D68E2C47B56800CCE805 /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B23B5E32C38C83400661718 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+		6BD4D6902C47B56E00CCE805 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6BD18AF72C3D1458001E2E48 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+		6BD4D6922C47B57200CCE805 /* TheMovieDBCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B7F8DFF2C4751CC00425480 /* XCRemoteSwiftPackageReference "TheMovieDBCore" */;
+			productName = TheMovieDBCore;
+		};
+		6BD4D6942C47B57700CCE805 /* Podcast App Design System */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B7F8E022C4757C600425480 /* XCRemoteSwiftPackageReference "Design-System" */;
+			productName = "Podcast App Design System";
 		};
 /* End XCSwiftPackageProductDependency section */
 
