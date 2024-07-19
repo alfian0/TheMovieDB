@@ -24,19 +24,11 @@ jobs:
         P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
         BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
         KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
-        TEMP_DIR: ${{ runner.temp }}
       run: |
-        # Check if RUNNER_TEMP is available
-        if [ -z "$RUNNER_TEMP" ]; then
-          echo "RUNNER_TEMP is not available. Using home directory."
-          TEMP_DIR=~
-        else
-          TEMP_DIR=$RUNNER_TEMP
-        fi
         # create variables
-        CERTIFICATE_PATH=$TEMP_DIR/build_certificate.p12
-        PP_PATH=$TEMP_DIR/build_pp.mobileprovision
-        KEYCHAIN_PATH=$TEMP_DIR/app-signing.keychain-db
+        CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+        PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
+        KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
 
         # Check if the P12_PASSWORD is not empty
         if [ -z "$P12_PASSWORD" ]; then
@@ -74,5 +66,5 @@ jobs:
     - name: Clean up keychain and provisioning profile
       if: ${{ always() }}
       run: |
-        security delete-keychain $TEMP_DIR/app-signing.keychain-db
+        security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
         rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
