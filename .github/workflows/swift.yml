@@ -35,6 +35,12 @@ jobs:
           echo "Certificate file not found at $CERTIFICATE_PATH"
           exit 1
         fi
+
+        # Check if the P12_PASSWORD is not empty
+        if [ -z "$P12_PASSWORD" ]; then
+          echo "P12_PASSWORD is not set"
+          exit 1
+        fi
         
         # import certificate and provisioning profile from secrets
         echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
