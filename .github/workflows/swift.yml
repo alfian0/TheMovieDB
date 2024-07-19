@@ -76,9 +76,9 @@ jobs:
         mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
         cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
     - name: Build
-      run: xcodebuild build -project "TheMovieDB.xcodeproj" -scheme "TheMovieDB" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+      run: xcodebuild clean test -project "TheMovieDB.xcodeproj" -scheme "TheMovieDB" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
     - name: Run tests
-      run: xcodebuild clean test -project "TheMovieDB.xcodeproj" -scheme "TheMovieDB" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1' -allowProvisioningUpdates
+      run: xcodebuild build -project "TheMovieDB.xcodeproj" -scheme "TheMovieDB" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
     - name: Clean up keychain and provisioning profile
       if: ${{ always() }}
       run: |
