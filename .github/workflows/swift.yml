@@ -43,9 +43,35 @@ jobs:
         echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
         echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
 
-         # Check if the certificate file exists
+        # create temporary keychain
+        security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+        security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+        security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+
+        # import certificate to keychain
+        security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+        security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+        security list-keychain -d user -s $KEYCHAIN_PATH
+
+        # apply provisioning profile
+        mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+        cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+    - name: Verify Code Signing
+      run: |
+        # Check if the certificate file exists
         if [ ! -f "$CERTIFICATE_PATH" ]; then
           echo "Certificate file not found at $CERTIFICATE_PATH"
+          exit 1
+        fi
+        
+        # List available code signing identities
+        security find-identity -p codesigning -v
+    
+        # Check if provisioning profile is present
+        if [ -f ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision ]; then
+          echo "Provisioning profile is present"
+        else
+          echo "Provisioning profile is missing"
           exit 1
         fi
 
@@ -61,20 +87,6 @@ jobs:
           echo "Bundle ID $BUNDLE_ID is NOT included in the provisioning profile"
           exit 1
         fi
-
-        # create temporary keychain
-        security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-        security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
-        security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-
-        # import certificate to keychain
-        security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
-        security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-        security list-keychain -d user -s $KEYCHAIN_PATH
-
-        # apply provisioning profile
-        mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-        cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
     - name: Build
       run: xcodebuild clean test -project "TheMovieDB.xcodeproj" -scheme "TheMovieDB" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
     - name: Run tests
