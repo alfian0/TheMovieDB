@@ -96,9 +96,25 @@ jobs:
           exit 1
         fi
     - name: Build
-      run: xcodebuild clean test -project "TheMovieDB.xcodeproj" -scheme "TheMovieDB" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1' CODE_SIGN_IDENTITY="Apple Development" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO -verbose | xcpretty
+      run: |
+        xcodebuild clean test -project "TheMovieDB.xcodeproj" \
+        -scheme "TheMovieDB" \
+        -sdk iphonesimulator \
+        -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1' \
+        CODE_SIGN_IDENTITY='Apple Development' \
+        CODE_SIGNING_REQUIRED=NO \
+        CODE_SIGNING_ALLOWED=NO \
+        -verbose | xcpretty
     - name: Run tests
-      run: xcodebuild build -project "TheMovieDB.xcodeproj" -scheme "TheMovieDB" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1' CODE_SIGN_IDENTITY="Apple Development" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO -verbose | xcpretty
+      run: |
+        xcodebuild build -project "TheMovieDB.xcodeproj" \
+        -scheme "TheMovieDB" \
+        -sdk iphonesimulator \
+        -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1' \
+        CODE_SIGN_IDENTITY="Apple Development" \
+        CODE_SIGNING_REQUIRED=NO \
+        CODE_SIGNING_ALLOWED=NO \
+        -verbose | xcpretty
     - name: Clean up keychain and provisioning profile
       if: ${{ always() }}
       run: |
