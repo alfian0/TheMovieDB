@@ -24,7 +24,6 @@ jobs:
         P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
         BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
         KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
-        BUNDLE_ID: ${{ secrets.BUNDLE_ID }}
         UUID: ${{ secrets.UUID }}
         DEVELOPMENT_TEAM: ${{ secrets.DEVELOPMENT_TEAM }}
       run: |
@@ -57,7 +56,12 @@ jobs:
         mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
         cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
     - name: Verify Code Signing
+      env:
+        BUNDLE_ID: ${{ secrets.BUNDLE_ID }}
       run: |
+        CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+        PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
+        
         # Check if the certificate file exists
         if [ ! -f "$CERTIFICATE_PATH" ]; then
           echo "Certificate file not found at $CERTIFICATE_PATH"
