@@ -95,22 +95,22 @@ jobs:
           echo "Bundle ID $BUNDLE_ID is NOT included in the provisioning profile"
           exit 1
         fi
-    - name: Build
+    - name: Run tests
       run: |
         xcodebuild clean test -project "TheMovieDB.xcodeproj" \
         -scheme "TheMovieDB" \
         -sdk iphonesimulator \
-        -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1' \
+        -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=18' \
         CODE_SIGN_IDENTITY='Apple Development' \
         CODE_SIGNING_REQUIRED=NO \
         CODE_SIGNING_ALLOWED=NO \
         -verbose | xcpretty
-    - name: Run tests
+    - name: Build
       run: |
         xcodebuild build -project "TheMovieDB.xcodeproj" \
         -scheme "TheMovieDB" \
         -sdk iphonesimulator \
-        -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1' \
+        -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=18' \
         CODE_SIGN_IDENTITY="Apple Development" \
         CODE_SIGNING_REQUIRED=NO \
         CODE_SIGNING_ALLOWED=NO \
