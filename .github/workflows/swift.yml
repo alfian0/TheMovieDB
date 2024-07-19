@@ -99,21 +99,18 @@ jobs:
       run: |
         xcodebuild clean test -project "TheMovieDB.xcodeproj" \
         -scheme "TheMovieDB" \
-        -sdk iphonesimulator \
         -configuration Debug \
+        -sdk iphonesimulator \
         -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=18' \
-        CODE_SIGN_IDENTITY='Apple Development' \
-        CODE_SIGNING_REQUIRED=NO \
-        CODE_SIGNING_ALLOWED=NO \
         -verbose | xcpretty
     - name: Build
       run: |
         xcodebuild build -project "TheMovieDB.xcodeproj" \
         -scheme "TheMovieDB" \
-        -sdk iphonesimulator \
         -configuration Debug \
+        -sdk iphonesimulator \
         -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=18' \
-        CODE_SIGN_IDENTITY="Apple Development" \
+        CODE_SIGN_IDENTITY="" \
         CODE_SIGNING_REQUIRED=NO \
         CODE_SIGNING_ALLOWED=NO \
         -verbose | xcpretty
