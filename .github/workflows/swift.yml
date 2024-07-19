@@ -18,10 +18,6 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-    - name: List available Xcode versions
-      run: ls /Applications | grep Xcode
-    - name: Select Xcode Version
-      run: sudo xcode-select -switch /Applications/Xcode_14.2.app && /usr/bin/xcodebuild -version
     - name: Install the Apple certificate and provisioning profile
       env:
         BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
