@@ -38,12 +38,6 @@ jobs:
         PP_PATH=$TEMP_DIR/build_pp.mobileprovision
         KEYCHAIN_PATH=$TEMP_DIR/app-signing.keychain-db
 
-        # Check if the certificate file exists
-        if [ ! -f "$CERTIFICATE_PATH" ]; then
-          echo "Certificate file not found at $CERTIFICATE_PATH"
-          exit 1
-        fi
-
         # Check if the P12_PASSWORD is not empty
         if [ -z "$P12_PASSWORD" ]; then
           echo "P12_PASSWORD is not set"
@@ -53,6 +47,12 @@ jobs:
         # import certificate and provisioning profile from secrets
         echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
         echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
+
+         # Check if the certificate file exists
+        if [ ! -f "$CERTIFICATE_PATH" ]; then
+          echo "Certificate file not found at $CERTIFICATE_PATH"
+          exit 1
+        fi
 
         # create temporary keychain
         security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
