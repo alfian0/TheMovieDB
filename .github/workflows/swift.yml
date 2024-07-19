@@ -14,8 +14,6 @@ jobs:
 
     runs-on: macos-latest
 
-    environment: stage
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -52,8 +50,3 @@ jobs:
       run: xcodebuild build -project "TheMovieDB.xcodeproj" -scheme "TheMovieDB" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1'
     - name: Run tests
       run: xcodebuild clean test -project "TheMovieDB.xcodeproj" -scheme "TheMovieDB" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1'
-    - name: Clean up keychain and provisioning profile
-      if: ${{ always() }}
-      run: |
-        security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
-        rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
