@@ -48,7 +48,7 @@ jobs:
         fi
 
         # Decode the provisioning profile
-        security cms -D -i "$PROVISIONING_PROFILE_PATH" > decoded_provisioning_profile.plist
+        security cms -D -i "$PP_PATH" > decoded_provisioning_profile.plist
 
         # Check if the bundle ID is included in the provisioning profile
         BUNDLE_IDS=$(plutil -extract Entitlements.application-identifier raw decoded_provisioning_profile.plist)
