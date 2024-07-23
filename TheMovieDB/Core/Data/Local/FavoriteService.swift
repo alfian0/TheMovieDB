@@ -12,6 +12,7 @@ protocol FavoriteService {
   func fetchFavorites() -> AnyPublisher<[FavoriteEntity], Error>
   func getFavorite(id: Int) -> AnyPublisher<[FavoriteEntity], Error>
   func addFavorite(id: Int, title: String, overview: String) -> AnyPublisher<[FavoriteEntity], Error>
+  func deleteFavorite(id: Int) -> AnyPublisher<[FavoriteEntity], Error>
 }
 
 final class FavoriteServiceImp: FavoriteService {
@@ -36,5 +37,9 @@ final class FavoriteServiceImp: FavoriteService {
       newFavorite.title = title
       newFavorite.overview = overview
     }
+  }
+
+  func deleteFavorite(id: Int) -> AnyPublisher<[FavoriteEntity], Error> {
+    self.client.delete(FavoriteEntity.self, predicate: ["id": id])
   }
 }

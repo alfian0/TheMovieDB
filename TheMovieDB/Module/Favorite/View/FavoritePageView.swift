@@ -24,16 +24,22 @@ struct FavoritePageView: View {
         }
         .padding(.horizontal, 64)
       } else {
-        GridStack(axis: .vertical, models: presenter.movies) { movie in
-          VStack(alignment: .leading) {
-            Text(movie.title)
-              .font(.headline)
-              .foregroundColor(.red)
-            Text(movie.overview)
-              .lineLimit(3)
+        List {
+          ForEach(presenter.movies, id: \.self) { movie in
+            VStack(alignment: .leading) {
+              Text(movie.title)
+                .font(.headline)
+                .foregroundColor(.red)
+              Text(movie.overview)
+                .lineLimit(3)
+            }
+          }
+          .onDelete { indexSet in
+            for index in indexSet {
+              presenter.deleteFavoriteMovie(index: index)
+            }
           }
         }
-        .padding(.horizontal, 8)
       }
     }
     .navigationBarTitle("Favorite")

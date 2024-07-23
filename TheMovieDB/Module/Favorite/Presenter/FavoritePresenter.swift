@@ -36,4 +36,17 @@ final class FavoritePresenter: ObservableObject {
       }
       .store(in: &cancellables)
   }
+
+  func deleteFavoriteMovie(index: Int) {
+    let id = movies[index].id
+    self.usecase.deleteFavorite(id: id)
+      .subscribe(on: DispatchQueue.global(qos: .background))
+      .receive(on: DispatchQueue.main)
+      .sink { _ in
+
+      } receiveValue: { _ in
+
+      }
+      .store(in: &cancellables)
+  }
 }

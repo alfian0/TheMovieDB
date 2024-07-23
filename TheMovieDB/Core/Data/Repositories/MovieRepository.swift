@@ -16,6 +16,7 @@ protocol MovieRepository {
   func searchMovies(with query: String) -> AnyPublisher<[MovieDTO], Error>
   func getFavorites() -> AnyPublisher<[FavoriteEntity], Error>
   func addFavorite(id: Int, title: String, overview: String) -> AnyPublisher<[FavoriteEntity], Error>
+  func deleteFavorite(id: Int) -> AnyPublisher<[FavoriteEntity], Error>
 }
 
 class MovieRepositoryImpl: MovieRepository {
@@ -67,5 +68,9 @@ class MovieRepositoryImpl: MovieRepository {
         return self.favoriteService.addFavorite(id: id, title: title, overview: overview)
       }
       .eraseToAnyPublisher()
+  }
+
+  func deleteFavorite(id: Int) -> AnyPublisher<[FavoriteEntity], Error> {
+    favoriteService.deleteFavorite(id: id)
   }
 }

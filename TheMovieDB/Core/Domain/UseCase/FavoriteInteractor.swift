@@ -10,6 +10,7 @@ import Combine
 
 protocol FavoriteUseCase {
   func getFavorites() -> AnyPublisher<[MovieModel], Error>
+  func deleteFavorite(id: Int) -> AnyPublisher<[FavoriteEntity], Error>
 }
 
 class FavoriteInteractor: FavoriteUseCase {
@@ -23,5 +24,9 @@ class FavoriteInteractor: FavoriteUseCase {
     self.repository.getFavorites()
       .tryMap(MovieModelMapper.mapFavoriteEntitiesToEntities)
       .eraseToAnyPublisher()
+  }
+
+  func deleteFavorite(id: Int) -> AnyPublisher<[FavoriteEntity], Error> {
+    self.repository.deleteFavorite(id: id)
   }
 }
