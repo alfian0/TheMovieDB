@@ -91,10 +91,6 @@ class HomePresenter: ObservableObject {
       .store(in: &cancellables)
   }
 
-  func goToDetail(with model: MovieModel) {
-    coordinator.goToDetail(with: model)
-  }
-
   func addFavorite(with model: MovieModel) {
     usecase.addFavorite(id: model.id, title: model.title, overview: model.overview)
       .subscribe(on: DispatchQueue.global(qos: .background))
@@ -120,5 +116,13 @@ class HomePresenter: ObservableObject {
         })
       }
       .store(in: &cancellables)
+  }
+
+  func goToDetail(with model: MovieModel) {
+    coordinator.goToDetail(with: model)
+  }
+
+  func goToAllList(with models: [MovieModel]) {
+    coordinator.goToAllList(with: models)
   }
 }

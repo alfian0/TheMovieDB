@@ -8,39 +8,37 @@
 import Foundation
 import TheMovieDBCore
 
-class APIRouter {
-  struct MovieDetail: Request {
-    typealias ReturnType = MovieDTO
-    var path: String
-    var queryParams: [String: Any]?
+struct MovieDetail: Request {
+  typealias ReturnType = MovieDTO
+  var path: String
+  var queryParams: [String: Any]?
 
-    init(id: Int) {
-      self.path = "/movie/\(id)"
-      self.queryParams = [
-        "append_to_response": "casts,videos"
-      ]
-    }
+  init(id: Int) {
+    self.path = "/movie/\(id)"
+    self.queryParams = [
+      "append_to_response": "casts,videos"
+    ]
   }
+}
 
-  struct Movies: Request {
-    typealias ReturnType = ListDTO<MovieDTO>
-    var path: String
+struct Movies: Request {
+  typealias ReturnType = ListDTO<MovieDTO>
+  var path: String
 
-    init(endpoint: MovieListEndpoint) {
-      self.path = "/movie/\(endpoint.rawValue)"
-    }
+  init(endpoint: MovieListEndpoint) {
+    self.path = "/movie/\(endpoint.rawValue)"
   }
+}
 
-  struct SearchMovies: Request {
-    typealias ReturnType = ListDTO<MovieDTO>
-    var path: String
-    var queryParams: [String: Any]?
+struct SearchMovies: Request {
+  typealias ReturnType = ListDTO<MovieDTO>
+  var path: String
+  var queryParams: [String: Any]?
 
-    init(query: String) {
-      self.path = "/search/movie"
-      self.queryParams = [
-        "query": query
-      ]
-    }
+  init(query: String) {
+    self.path = "/search/movie"
+    self.queryParams = [
+      "query": query
+    ]
   }
 }

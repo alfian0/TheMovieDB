@@ -113,6 +113,16 @@ final class Injection {
       return FavoritePageView(presenter: presenter)
     }
 
+    // MARK: All List
+    container.register(AllListPresenter.self) { _, movies, coordinator in
+      return AllListPresenter(movies: movies, coordinator: coordinator)
+    }
+
+    container.register(AllListView.self) { (resolver, movies: [MovieModel], coordinator: AllListCoordinator) in
+      let presenter = resolver.resolve(AllListPresenter.self, arguments: movies, coordinator)!
+      return AllListView(presenter: presenter)
+    }
+
     return container
   }
 }

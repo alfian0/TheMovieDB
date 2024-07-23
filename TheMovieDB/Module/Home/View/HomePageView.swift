@@ -20,45 +20,59 @@ struct HomePageView: View {
 
       ScrollView(showsIndicators: false) {
         VStack {
-          SectionView(axis: .horizontal, title: MovieListEndpoint.nowPlaying.description, models: presenter.nowPlayingMovies) { movie in
-            MoviePosterCard(movie: movie)
+          SectionView(
+            axis: .horizontal,
+            title: MovieListEndpoint.nowPlaying.description,
+            models: presenter.nowPlayingMovies,
+            content: { movie in
+              MoviePosterCard(movie: movie)
+                .onTapGesture {
+                  presenter.goToDetail(with: movie)
+                }
+            }, actionTitle: "See all", action: {
+              presenter.goToAllList(with: presenter.nowPlayingMovies)
+            })
+            .onAppear {
+              presenter.getNowPlayingMovies()
+            }
+
+          SectionView(
+            axis: .horizontal,
+            title: MovieListEndpoint.upcoming.description,
+            models: presenter.upcomingMovies,
+            content: { movie in
+              MovieBackdropCard(movie: movie) {
+                presenter.addFavorite(with: movie)
+              }
               .onTapGesture {
                 presenter.goToDetail(with: movie)
               }
-          }
-          .onAppear {
-            presenter.getNowPlayingMovies()
-          }
+              .frame(height: 200 + 16)
+            }, actionTitle: "See all", action: {
+              presenter.goToAllList(with: presenter.upcomingMovies)
+            })
+            .onAppear {
+              presenter.getUpcomingMovies()
+            }
 
-          SectionView(axis: .horizontal,
-                      title: MovieListEndpoint.upcoming.description,
-                      models: presenter.upcomingMovies) { movie in
-            MovieBackdropCard(movie: movie) {
-              presenter.addFavorite(with: movie)
+          SectionView(
+            axis: .horizontal,
+            title: MovieListEndpoint.topRated.description,
+            models: presenter.topRatedMovies,
+            content: { movie in
+              MovieBackdropCard(movie: movie) {
+                presenter.addFavorite(with: movie)
+              }
+              .onTapGesture {
+                presenter.goToDetail(with: movie)
+              }
+              .frame(height: 200 + 16)
+            }, actionTitle: "See all", action: {
+              presenter.goToAllList(with: presenter.topRatedMovies)
+            })
+            .onAppear {
+              presenter.getToRatedMovies()
             }
-            .onTapGesture {
-              presenter.goToDetail(with: movie)
-            }
-            .frame(height: 200 + 16)
-          }
-          .onAppear {
-            presenter.getUpcomingMovies()
-          }
-
-          SectionView(axis: .horizontal,
-                      title: MovieListEndpoint.topRated.description,
-                      models: presenter.topRatedMovies) { movie in
-            MovieBackdropCard(movie: movie) {
-              presenter.addFavorite(with: movie)
-            }
-            .onTapGesture {
-              presenter.goToDetail(with: movie)
-            }
-            .frame(height: 200 + 16)
-          }
-          .onAppear {
-            presenter.getToRatedMovies()
-          }
         }
       }
     }

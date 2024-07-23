@@ -24,7 +24,7 @@ struct MoviePosterCard: View {
         .aspectRatio(contentMode: .fit)
         .shadow(radius: 4)
     }
-    .frame(width: 206, height: 304)
+    .frame(width: ((UIScreen.main.bounds.width-40)/2), height: 304/206*((UIScreen.main.bounds.width-40)/2))
   }
 }
 

@@ -12,16 +12,30 @@ struct FavoritePageView: View {
   @ObservedObject var presenter: FavoritePresenter
 
   var body: some View {
-    GridStack(axis: .vertical, models: presenter.movies) { movie in
-      VStack(alignment: .leading) {
-        Text(movie.title)
-          .font(.headline)
-          .foregroundColor(.red)
-        Text(movie.overview)
-          .lineLimit(3)
+    Group {
+      if presenter.movies.count <= 0 {
+        VStack(spacing: 16) {
+          Image(systemName: "heart")
+            .foregroundColor(.red)
+
+          Text("You can add favorite by tap heart icon on the movie list")
+            .font(.body)
+            .multilineTextAlignment(.center)
+        }
+        .padding(.horizontal, 64)
+      } else {
+        GridStack(axis: .vertical, models: presenter.movies) { movie in
+          VStack(alignment: .leading) {
+            Text(movie.title)
+              .font(.headline)
+              .foregroundColor(.red)
+            Text(movie.overview)
+              .lineLimit(3)
+          }
+        }
+        .padding(.horizontal, 8)
       }
     }
-    .padding(.horizontal, 8)
     .navigationBarTitle("Favorite")
     .onAppear {
       self.presenter.getFavoriteMovies()

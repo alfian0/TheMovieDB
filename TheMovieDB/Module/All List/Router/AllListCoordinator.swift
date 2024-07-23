@@ -1,14 +1,13 @@
 //
-//  HomeCoordinator.swift
+//  AllListRouter.swift
 //  TheMovieDB
 //
-//  Created by alfian on 09/07/24.
+//  Created by alfian on 23/07/24.
 //
 
-import UIKit
 import SwiftUI
 
-final class HomeCoordinator: Coordinator {
+final class AllListCoordinator {
   var childCoordinator: [Coordinator] = [Coordinator]()
   var navigationController: UINavigationController
 
@@ -16,11 +15,11 @@ final class HomeCoordinator: Coordinator {
     self.navigationController = navigationController
   }
 
-  func start() {
-    let view = Injection.shared.container.resolve(HomePageView.self, argument: self)
+  func start(with models: [MovieModel]) {
+    let view = Injection.shared.container.resolve(AllListView.self, arguments: models, self)
     let viewController = UIHostingController(rootView: view)
 
-    self.navigationController.pushViewController(viewController, animated: false)
+    self.navigationController.pushViewController(viewController, animated: true)
   }
 
   func goToDetail(with model: MovieModel) {
@@ -29,10 +28,5 @@ final class HomeCoordinator: Coordinator {
     viewController.hidesBottomBarWhenPushed = true
 
     self.navigationController.pushViewController(viewController, animated: true)
-  }
-
-  func goToAllList(with models: [MovieModel]) {
-    let coordinator = AllListCoordinator(navigationController: self.navigationController)
-    coordinator.start(with: models)
   }
 }

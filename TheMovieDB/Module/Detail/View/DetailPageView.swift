@@ -69,42 +69,54 @@ struct DetailPageView: View {
           .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
 
           if !presenter.model.casts.isEmpty {
-            SectionView(axis: .horizontal, title: "Cast", models: presenter.model.casts) { cast in
-              VStack {
-                WebImage(url: cast.profileURL)
-                  .resizable()
-                  .indicator(.activity)
-                  .aspectRatio(contentMode: .fill)
-                  .frame(width: 64, height: 64)
-                  .clipShape(Circle())
+            SectionView(
+              axis: .horizontal,
+              title: "Cast",
+              models: presenter.model.casts,
+              content: { cast in
+                VStack {
+                  WebImage(url: cast.profileURL)
+                    .resizable()
+                    .indicator(.activity)
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 64, height: 64)
+                    .clipShape(Circle())
 
-                Text(cast.name)
-                  .font(.Label.l)
-                  .foregroundColor(.foregroundDefault)
-                  .multilineTextAlignment(.center)
-                  .lineLimit(2)
-              }
-              .frame(width: 64)
-            }
+                  Text(cast.name)
+                    .font(.Label.l)
+                    .foregroundColor(.foregroundDefault)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2)
+                }
+                .frame(width: 64)
+              }, actionTitle: "", action: {
+
+              })
           }
 
           if !presenter.model.videos.isEmpty {
-            SectionView(axis: .horizontal, title: "Trailer", models: presenter.model.videos) { video in
-              ZStack {
-                Rectangle()
-                  .fill(Color.gray.opacity(0.1))
+            SectionView(
+              axis: .horizontal,
+              title: "Trailer",
+              models: presenter.model.videos,
+              content: { video in
+                ZStack {
+                  Rectangle()
+                    .fill(Color.gray.opacity(0.1))
 
-                WebImage(url: video.thumbnailURL)
-                  .resizable()
-                  .indicator(.activity)
-                  .cornerRadius(8)
-              }
-              .padding(.top, 8)
-              .padding(.bottom, 8)
-              .frame(width: 16/9*120)
-              .aspectRatio(16/9, contentMode: .fill)
-              .frame(height: 120+16)
-            }
+                  WebImage(url: video.thumbnailURL)
+                    .resizable()
+                    .indicator(.activity)
+                    .cornerRadius(8)
+                }
+                .padding(.top, 8)
+                .padding(.bottom, 8)
+                .frame(width: 16/9*120)
+                .aspectRatio(16/9, contentMode: .fill)
+                .frame(height: 120+16)
+              }, actionTitle: "", action: {
+
+              })
           }
         }
         .padding(.bottom, 16)
