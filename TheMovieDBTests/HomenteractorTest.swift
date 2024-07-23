@@ -6,9 +6,10 @@
 //
 
 import XCTest
-import TheMovieDBCore
 import CoreData
 import Combine
+import TheMovieDBCore
+import TheMovieDBService
 @testable import TheMovieDB
 
 // swiftlint:disable all
@@ -94,7 +95,7 @@ final class MovieInteractorTest: XCTestCase {
     }
     
     private func createMockData() -> Data {
-      guard let url = Bundle.main.url(forResource: "now_playing", withExtension: "json"),
+      guard let url = Bundle.theMovieDBService.url(forResource: "now_playing", withExtension: "json"),
             let data = try? Data(contentsOf: url) else {
         return Data()
       }

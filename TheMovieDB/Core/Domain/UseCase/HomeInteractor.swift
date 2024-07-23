@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import TheMovieDBService
 
 protocol HomeUseCase {
   func getNowPlayingMovies() -> AnyPublisher<[MovieModel], Error>

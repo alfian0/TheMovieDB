@@ -6,9 +6,10 @@
 //
 
 import XCTest
-import TheMovieDBCore
 import CoreData
 import Combine
+import TheMovieDBCore
+import TheMovieDBService
 @testable import TheMovieDB
 
 final class DetailInteractorTest: XCTestCase {
@@ -51,7 +52,7 @@ final class DetailInteractorTest: XCTestCase {
   }
 
   private func createMockData() -> Data {
-    guard let url = Bundle.main.url(forResource: "movie_detail", withExtension: "json"),
+    guard let url = Bundle.theMovieDBService.url(forResource: "movie_detail", withExtension: "json"),
           let data = try? Data(contentsOf: url) else {
       return Data()
     }

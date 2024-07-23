@@ -9,6 +9,7 @@ import Foundation
 import Swinject
 import CoreData
 import TheMovieDBCore
+import TheMovieDBService
 
 final class Injection {
   static let shared: Injection = Injection()
@@ -45,7 +46,10 @@ final class Injection {
     }
 
     container.register(FavoriteService.self) { _ in
-      return FavoriteServiceImp(with: CoreDataClient(container: NSPersistentContainer(name: "MovieContainer")))
+      let url = Bundle.theMovieDBService.url(forResource: "MovieContainer", withExtension: "momd")!
+      let managedObjectModel =  NSManagedObjectModel(contentsOf: url)!
+      let container = NSPersistentContainer(name: "MovieContainer", managedObjectModel: managedObjectModel)
+      return FavoriteServiceImp(with: CoreDataClient(container: container))
     }
 
     container.register(MovieRepository.self) { resolver in

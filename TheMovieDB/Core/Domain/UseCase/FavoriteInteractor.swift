@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import TheMovieDBService
 
 protocol FavoriteUseCase {
   func getFavorites() -> AnyPublisher<[MovieModel], Error>

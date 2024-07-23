@@ -8,6 +8,7 @@
 import SwiftUI
 import SDWebImageSwiftUI
 import Podcast_App_Design_System
+import TheMovieDBService
 
 struct MovieBackdropCard: View {
   let movie: MovieModel

@@ -7,23 +7,29 @@
 
 import XCTest
 import CoreData
+import TheMovieDBCore
+import TheMovieDBService
 @testable import TheMovieDB
 
 final class MovieModelMapperTest: XCTestCase {
   func testMapMovieResponseToEntity() {
-    let movieResponse = MovieDTO(id: 1,
-                                 title: "Test Movie",
-                                 backdropPath: "/test_backdrop.jpg",
-                                 posterPath: "/test_poster.jpg",
-                                 overview: "Test overview",
-                                 voteAverage: 8.5,
-                                 voteCount: 120,
-                                 runtime: 120,
-                                 releaseDate: "2023-06-15",
-                                 casts: CastsDTO(cast: [CastDTO(id: 1, name: "Actor 1", profilePath: "/profile1.jpg")]),
-                                 videos: ListDTO<VideosDTO>(results: [
-                                  VideosDTO(id: "1", site: "YouTube", key: "test_key", type: "Trailer")
-                                 ]))
+    let movieResponse = MovieDTO(
+      id: 1,
+      title: "Test Movie",
+      backdropPath: "/test_backdrop.jpg",
+      posterPath: "/test_poster.jpg",
+      overview: "Test overview",
+      voteAverage: 8.5,
+      voteCount: 120,
+      runtime: 120,
+      releaseDate: "2023-06-15",
+      casts: CastsDTO(cast: [
+        CastDTO(id: 1, name: "Actor 1", profilePath: "/profile1.jpg")
+      ]),
+      videos: ListDTO<VideosDTO>(results: [
+        VideosDTO(id: "1", site: "YouTube", key: "test_key", type: "Trailer")
+      ])
+    )
 
     let movieModel = MovieModelMapper.mapMovieResponseToEntity(input: movieResponse)
 
@@ -47,7 +53,9 @@ final class MovieModelMapperTest: XCTestCase {
   }
 
   func testMapFavoriteEntityToEntity() {
-    let container = NSPersistentContainer(name: "MovieContainer")
+    let url = Bundle.theMovieDBService.url(forResource: "MovieContainer", withExtension: "momd")!
+    let managedObjectModel =  NSManagedObjectModel(contentsOf: url)!
+    let container = NSPersistentContainer(name: "MovieContainer", managedObjectModel: managedObjectModel)
     let favoriteEntity = FavoriteEntity(context: container.viewContext)
     favoriteEntity.id = 1
     favoriteEntity.title = "Favorite Movie"

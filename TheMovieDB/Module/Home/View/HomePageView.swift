@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 import TheMovieDBCore
 import Podcast_App_Design_System
+import TheMovieDBService
 
 struct HomePageView: View {
   @ObservedObject var presenter: HomePresenter

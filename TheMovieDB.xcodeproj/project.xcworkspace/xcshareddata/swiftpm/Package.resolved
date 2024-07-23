@@ -51,7 +51,16 @@
       "location" : "https://github.com/alfian0/TheMovieDBCore.git",
       "state" : {
         "branch" : "main",
-        "revision" : "f6192c1f6af32408a280d00628e3430a53f33ae1"
+        "revision" : "1f6f90c870059aadbdd58a2331d09967e44a9890"
+      }
+    },
+    {
+      "identity" : "themoviedbservice",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/alfian0/TheMovieDBService.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e5acb31b68279fc3aeca6301475a0f00683217aa"
       }
     }
   ],

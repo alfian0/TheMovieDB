@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import TheMovieDBService
 
 protocol DetailUseCase {
   func getMovieDetail(id: Int) -> AnyPublisher<MovieModel, Error>

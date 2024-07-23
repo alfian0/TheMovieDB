@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import TheMovieDBService
 
 struct MoviePosterCard: View {
   let movie: MovieModel

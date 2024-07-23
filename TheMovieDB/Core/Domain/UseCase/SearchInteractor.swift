@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import TheMovieDBService
 
 protocol SearchUseCase {
   func searchMovies(with query: String) -> AnyPublisher<[MovieModel], Error>

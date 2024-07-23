@@ -9,6 +9,7 @@ import SwiftUI
 import SDWebImageSwiftUI
 import TheMovieDBCore
 import Podcast_App_Design_System
+import TheMovieDBService
 
 struct DetailPageView: View {
   @ObservedObject var presenter: DetailPresenter
