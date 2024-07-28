@@ -103,6 +103,10 @@ jobs:
         -sdk iphonesimulator \
         -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=18.0' \
         -verbose | xcpretty
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v4.0.1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
     - name: Build
       run: |
         xcodebuild build -project "TheMovieDB.xcodeproj" \
