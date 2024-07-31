@@ -21,6 +21,7 @@ final class AllListCoordinator: Coordinator {
   func start() {
     let view = Injection.shared.container.resolve(AllListView.self, arguments: models, self)
     let viewController = UIHostingController(rootView: view)
+    viewController.hidesBottomBarWhenPushed = true
 
     self.navigationController.pushViewController(viewController, animated: true)
   }
@@ -28,7 +29,6 @@ final class AllListCoordinator: Coordinator {
   func goToDetail(with model: MovieModel) {
     let view = Injection.shared.container.resolve(DetailPageView.self, argument: model)
     let viewController = UIHostingController(rootView: view)
-    viewController.hidesBottomBarWhenPushed = true
 
     self.navigationController.pushViewController(viewController, animated: true)
   }

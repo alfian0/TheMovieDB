@@ -10,26 +10,11 @@ import TheMovieDBCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-  var deepLinkManager: DeepLinkManager?
-  var analyticsManager: AnalyticsManager?
-
   func application(
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
     // Override point for customization after application launch.
-    let productDeepLink = ProductDeepLink(url: URL(string: "myapp://product")!)
-    let profileDeepLink = ProfileDeepLink(url: URL(string: "myapp://profile")!)
-
-    deepLinkManager = DefaultDeepLinkManager(deepLinks: [productDeepLink, profileDeepLink])
-
-    let firebaseService = FirebaseAnalyticsService()
-    let mixpanelService = MixpanelAnalyticsService()
-
-    analyticsManager = DefaultAnalyticsManager(services: [firebaseService, mixpanelService])
-
-    analyticsManager?.logEvent("app_launch", parameters: nil)
-
     return true
   }
 
@@ -49,17 +34,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // If any sessions were discarded while the application was not running,
     // this will be called shortly after application:didFinishLaunchingWithOptions.
     // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-  }
-
-  func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-    deepLinkManager?.handleDeepLink(url: url)
-    return true
-  }
-
-  func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
-    if userActivity?.activityType == NSUserActivityTypeBrowsingWeb, let url = userActivity?.webpageURL {
-      deepLinkManager?.handleDeepLink(url: url)
-    }
-    return true
   }
 }
