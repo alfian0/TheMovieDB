@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import TheMovieDBCore
+import Podcast_App_Design_System
 
 struct SearchPageView: View {
   @ObservedObject var presenter: SearchPresenter
