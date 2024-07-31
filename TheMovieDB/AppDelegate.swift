@@ -6,15 +6,22 @@
 //
 
 import UIKit
+import TheMovieDBCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+  var deepLinkManager: DeepLinkManager?
 
   func application(
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
     // Override point for customization after application launch.
+    let productDeepLink = ProductDeepLink(url: URL(string: "myapp://product")!)
+    let profileDeepLink = ProfileDeepLink(url: URL(string: "myapp://profile")!)
+
+    deepLinkManager = DefaultDeepLinkManager(deepLinks: [productDeepLink, profileDeepLink])
+
     return true
   }
 
@@ -36,4 +43,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
   }
 
+  func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+    deepLinkManager?.handleDeepLink(url: url)
+    return true
+  }
+
+  func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
+    if userActivity?.activityType == NSUserActivityTypeBrowsingWeb, let url = userActivity?.webpageURL {
+      deepLinkManager?.handleDeepLink(url: url)
+    }
+    return true
+  }
 }

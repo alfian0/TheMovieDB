@@ -51,7 +51,7 @@
       "location" : "https://github.com/alfian0/TheMovieDBCore.git",
       "state" : {
         "branch" : "main",
-        "revision" : "1f6f90c870059aadbdd58a2331d09967e44a9890"
+        "revision" : "dd41b2cd0c6336db369c036f1aaea12d102e451b"
       }
     },
     {
@@ -60,7 +60,7 @@
       "location" : "https://github.com/alfian0/TheMovieDBService.git",
       "state" : {
         "branch" : "main",
-        "revision" : "e5acb31b68279fc3aeca6301475a0f00683217aa"
+        "revision" : "c5c9b09b57507c9977dc9267743b464841bea51a"
       }
     }
   ],
