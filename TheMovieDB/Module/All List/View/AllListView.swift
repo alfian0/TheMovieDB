@@ -29,7 +29,8 @@ struct AllListView_Previews: PreviewProvider {
     static var previews: some View {
       AllListView(
         presenter: AllListPresenter(movies: [],
-                                    coordinator: AllListCoordinator(navigationController: UINavigationController())
+                                    coordinator: AllListCoordinator(navigationController: UINavigationController(),
+                                                                    models: [])
                                    )
       )
     }

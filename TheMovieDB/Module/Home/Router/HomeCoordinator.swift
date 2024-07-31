@@ -32,7 +32,7 @@ final class HomeCoordinator: Coordinator {
   }
 
   func goToAllList(with models: [MovieModel]) {
-    let coordinator = AllListCoordinator(navigationController: self.navigationController)
-    coordinator.start(with: models)
+    let coordinator = AllListCoordinator(navigationController: self.navigationController, models: models)
+    coordinator.start()
   }
 }

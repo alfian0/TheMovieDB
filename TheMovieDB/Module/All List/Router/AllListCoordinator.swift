@@ -7,15 +7,17 @@
 
 import SwiftUI
 
-final class AllListCoordinator {
+final class AllListCoordinator: Coordinator {
   var childCoordinator: [Coordinator] = [Coordinator]()
   var navigationController: UINavigationController
+  var models: [MovieModel]
 
-  init(navigationController: UINavigationController) {
+  init(navigationController: UINavigationController, models: [MovieModel]) {
     self.navigationController = navigationController
+    self.models = models
   }
 
-  func start(with models: [MovieModel]) {
+  func start() {
     let view = Injection.shared.container.resolve(AllListView.self, arguments: models, self)
     let viewController = UIHostingController(rootView: view)
 
