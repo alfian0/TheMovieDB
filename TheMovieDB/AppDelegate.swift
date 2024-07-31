@@ -11,6 +11,7 @@ import TheMovieDBCore
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
   var deepLinkManager: DeepLinkManager?
+  var analyticsManager: AnalyticsManager?
 
   func application(
     _ application: UIApplication,
@@ -21,6 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let profileDeepLink = ProfileDeepLink(url: URL(string: "myapp://profile")!)
 
     deepLinkManager = DefaultDeepLinkManager(deepLinks: [productDeepLink, profileDeepLink])
+
+    let firebaseService = FirebaseAnalyticsService()
+    let mixpanelService = MixpanelAnalyticsService()
+
+    analyticsManager = DefaultAnalyticsManager(services: [firebaseService, mixpanelService])
+
+    analyticsManager?.logEvent("app_launch", parameters: nil)
 
     return true
   }

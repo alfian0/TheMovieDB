@@ -55,6 +55,8 @@
 		6BD4D6952C47B57700CCE805 /* Podcast App Design System in Frameworks */ = {isa = PBXBuildFile; productRef = 6BD4D6942C47B57700CCE805 /* Podcast App Design System */; };
 		6BDAAB1C2C5A21530048E528 /* ProductDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDAAB1B2C5A21530048E528 /* ProductDeepLink.swift */; };
 		6BDAAB1E2C5A22260048E528 /* ProfileDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDAAB1D2C5A22260048E528 /* ProfileDeepLink.swift */; };
+		6BDAAB212C5A24E00048E528 /* FirebaseAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDAAB202C5A24DF0048E528 /* FirebaseAnalyticsService.swift */; };
+		6BDAAB232C5A25060048E528 /* MixpanelAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDAAB222C5A25060048E528 /* MixpanelAnalyticsService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +111,8 @@
 		6BD18B062C3D58CE001E2E48 /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		6BDAAB1B2C5A21530048E528 /* ProductDeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDeepLink.swift; sourceTree = "<group>"; };
 		6BDAAB1D2C5A22260048E528 /* ProfileDeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDeepLink.swift; sourceTree = "<group>"; };
+		6BDAAB202C5A24DF0048E528 /* FirebaseAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsService.swift; sourceTree = "<group>"; };
+		6BDAAB222C5A25060048E528 /* MixpanelAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixpanelAnalyticsService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,6 +294,7 @@
 		6B3CFB9E2C3674C60038873E /* TheMovieDB */ = {
 			isa = PBXGroup;
 			children = (
+				6BDAAB1F2C5A24CD0048E528 /* Analytics */,
 				6BDAAB1A2C5A21440048E528 /* Deeplink */,
 				6B3CFBAD2C36755D0038873E /* Core */,
 				6B3CFBB12C3675920038873E /* Module */,
@@ -483,6 +488,15 @@
 			path = Deeplink;
 			sourceTree = "<group>";
 		};
+		6BDAAB1F2C5A24CD0048E528 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				6BDAAB202C5A24DF0048E528 /* FirebaseAnalyticsService.swift */,
+				6BDAAB222C5A25060048E528 /* MixpanelAnalyticsService.swift */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -664,9 +678,11 @@
 				6B3CFBF82C369D360038873E /* MovieBackdropCard.swift in Sources */,
 				6BDAAB1C2C5A21530048E528 /* ProductDeepLink.swift in Sources */,
 				6B0ACCE42C3BF14E008AD327 /* SceneDelegate.swift in Sources */,
+				6BDAAB232C5A25060048E528 /* MixpanelAnalyticsService.swift in Sources */,
 				6B3249312C3974FC00E67ED4 /* SearchPageView.swift in Sources */,
 				6B3AACDF2C4F30BB00D935F7 /* AllListCoordinator.swift in Sources */,
 				6B8213EE2C37C79100F940F6 /* HomePresenter.swift in Sources */,
+				6BDAAB212C5A24E00048E528 /* FirebaseAnalyticsService.swift in Sources */,
 				6B32492B2C39742900E67ED4 /* SearchInteractor.swift in Sources */,
 				6B3CFBFC2C369DFE0038873E /* MovieModel.swift in Sources */,
 				6B8213FD2C37F98300F940F6 /* DetailPresenter.swift in Sources */,
