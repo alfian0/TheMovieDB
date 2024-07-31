@@ -5,8 +5,8 @@
 //  Created by alfian on 09/07/24.
 //
 
-import UIKit
 import SwiftUI
+import TheMovieDBCore
 
 final class HomeCoordinator: Coordinator {
   var childCoordinator: [Coordinator] = [Coordinator]()

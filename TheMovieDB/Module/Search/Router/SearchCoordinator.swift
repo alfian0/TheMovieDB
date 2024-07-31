@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import TheMovieDBCore
 
 final class SearchCoordinator: Coordinator {
   var childCoordinator: [Coordinator] = [Coordinator]()

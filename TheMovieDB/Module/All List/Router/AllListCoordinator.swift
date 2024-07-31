@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TheMovieDBCore
 
 final class AllListCoordinator: Coordinator {
   var childCoordinator: [Coordinator] = [Coordinator]()

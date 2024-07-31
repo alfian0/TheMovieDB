@@ -7,14 +7,8 @@
 
 import UIKit
 import SwiftUI
+import TheMovieDBCore
 import Podcast_App_Design_System
-
-protocol Coordinator {
-  var childCoordinator: [Coordinator] { get set }
-  var navigationController: UINavigationController { get set }
-
-  func start()
-}
 
 final class MainCoordinator {
   var childCoordinator: [Coordinator] = [Coordinator]()

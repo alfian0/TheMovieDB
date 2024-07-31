@@ -5,8 +5,8 @@
 //  Created by alfian on 10/07/24.
 //
 
-import UIKit
 import SwiftUI
+import TheMovieDBCore
 
 final class FavoriteCoordinator: Coordinator {
   var childCoordinator: [Coordinator] = [Coordinator]()
