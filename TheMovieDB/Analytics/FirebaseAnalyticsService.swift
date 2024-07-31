@@ -7,20 +7,18 @@
 
 import Foundation
 import TheMovieDBCore
+import FirebaseAnalytics
 
 class FirebaseAnalyticsService: AnalyticsService {
   func logEvent(_ name: String, parameters: [String: Any]?) {
-    // Log event to Firebase
-    print("Logging event to Firebase: \(name), parameters: \(String(describing: parameters))")
+    Analytics.logEvent(name, parameters: parameters)
   }
 
   func setUserId(_ userId: String) {
-    // Set user ID in Firebase
-    print("Setting user ID in Firebase: \(userId)")
+    Analytics.setUserID(userId)
   }
 
   func setUserProperty(_ name: String, value: String) {
-    // Set user property in Firebase
-    print("Setting user property in Firebase: \(name) = \(value)")
+    Analytics.setUserProperty(value, forName: name)
   }
 }

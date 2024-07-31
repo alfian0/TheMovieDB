@@ -57,6 +57,8 @@
 		6BDAAB1E2C5A22260048E528 /* ProfileDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDAAB1D2C5A22260048E528 /* ProfileDeepLink.swift */; };
 		6BDAAB212C5A24E00048E528 /* FirebaseAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDAAB202C5A24DF0048E528 /* FirebaseAnalyticsService.swift */; };
 		6BDAAB232C5A25060048E528 /* MixpanelAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDAAB222C5A25060048E528 /* MixpanelAnalyticsService.swift */; };
+		6BDAAB252C5A52270048E528 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6BDAAB242C5A52270048E528 /* GoogleService-Info.plist */; };
+		6BDAAB282C5A54110048E528 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 6BDAAB272C5A54110048E528 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +115,7 @@
 		6BDAAB1D2C5A22260048E528 /* ProfileDeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDeepLink.swift; sourceTree = "<group>"; };
 		6BDAAB202C5A24DF0048E528 /* FirebaseAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsService.swift; sourceTree = "<group>"; };
 		6BDAAB222C5A25060048E528 /* MixpanelAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixpanelAnalyticsService.swift; sourceTree = "<group>"; };
+		6BDAAB242C5A52270048E528 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +127,7 @@
 				6B7F8E042C4757C600425480 /* Podcast App Design System in Frameworks */,
 				6B23B5DC2C38BA0600661718 /* Alamofire in Frameworks */,
 				6B3AACE52C4FC9B600D935F7 /* TheMovieDBService in Frameworks */,
+				6BDAAB282C5A54110048E528 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				6B7F8E012C4751CC00425480 /* TheMovieDBCore in Frameworks */,
 				6B23B5E52C38C83400661718 /* Swinject in Frameworks */,
 			);
@@ -303,6 +307,7 @@
 				6B0ACCE12C3BF0D6008AD327 /* AppDelegate.swift */,
 				6B0ACCE32C3BF14E008AD327 /* SceneDelegate.swift */,
 				6B0ACCE52C3BF186008AD327 /* Info.plist */,
+				6BDAAB242C5A52270048E528 /* GoogleService-Info.plist */,
 			);
 			path = TheMovieDB;
 			sourceTree = "<group>";
@@ -521,6 +526,7 @@
 				6B7F8E002C4751CC00425480 /* TheMovieDBCore */,
 				6B7F8E032C4757C600425480 /* Podcast App Design System */,
 				6B3AACE42C4FC9B600D935F7 /* TheMovieDBService */,
+				6BDAAB272C5A54110048E528 /* FirebaseAnalyticsWithoutAdIdSupport */,
 			);
 			productName = TheMovieDB;
 			productReference = 6B3CFB9C2C3674C60038873E /* TheMovieDB.app */;
@@ -589,6 +595,7 @@
 				6B7F8DFF2C4751CC00425480 /* XCRemoteSwiftPackageReference "TheMovieDBCore" */,
 				6B7F8E022C4757C600425480 /* XCRemoteSwiftPackageReference "Design-System" */,
 				6B3AACE32C4FC9B600D935F7 /* XCRemoteSwiftPackageReference "TheMovieDBService" */,
+				6BDAAB262C5A54110048E528 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 6B3CFB9D2C3674C60038873E /* Products */;
 			projectDirPath = "";
@@ -606,6 +613,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B8214072C383C0000F940F6 /* .swiftlint.yml in Resources */,
+				6BDAAB252C5A52270048E528 /* GoogleService-Info.plist in Resources */,
 				6B3CFBA72C3674CC0038873E /* Preview Assets.xcassets in Resources */,
 				6B3CFBA42C3674CC0038873E /* Assets.xcassets in Resources */,
 			);
@@ -1298,6 +1306,14 @@
 				version = 2.2.7;
 			};
 		};
+		6BDAAB262C5A54110048E528 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1355,6 +1371,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6B7F8E022C4757C600425480 /* XCRemoteSwiftPackageReference "Design-System" */;
 			productName = "Podcast App Design System";
+		};
+		6BDAAB272C5A54110048E528 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6BDAAB262C5A54110048E528 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
