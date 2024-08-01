@@ -65,8 +65,8 @@ final class MovieModelMapperTest: XCTestCase {
 
     XCTAssertEqual(movieModel.id, 1)
     XCTAssertEqual(movieModel.title, "Favorite Movie")
-    XCTAssertEqual(movieModel.backdropURL, URL(string: APIConstans.placeholderImageURLString))
-    XCTAssertEqual(movieModel.posterURL, URL(string: APIConstans.placeholderImageURLString))
+    XCTAssertEqual(movieModel.backdropURL, API.imageUrlPlaceholder)
+    XCTAssertEqual(movieModel.posterURL, API.imageUrlPlaceholder)
     XCTAssertEqual(movieModel.overview, "Favorite overview")
     XCTAssertEqual(movieModel.rating, "")
     XCTAssertEqual(movieModel.score, "")

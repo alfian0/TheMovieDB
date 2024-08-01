@@ -35,14 +35,14 @@ final class Injection {
     container.register(HTTPClient.self) { _ in
       // MARK: Because we use clean architecture we can change Client to use URLSession or Alamofire
       #if FRAMEWORK
-      return AlamofireAuthenticatedClient()
+      return AlamofireAuthenticatedClient(apiKey: API.key)
       #else
-      return AuthenticatedHTTPClient(apiKey: APIConstans.apiKey)
+      return AuthenticatedHTTPClient(apiKey: API.key)
       #endif
     }
 
     container.register(MovieService.self) { resolver in
-      return MovieServiceImpl(client: resolver.resolve(HTTPClient.self)!)
+      return MovieServiceImpl(client: resolver.resolve(HTTPClient.self)!, baseURL: API.urlString)
     }
 
     container.register(FavoriteService.self) { _ in

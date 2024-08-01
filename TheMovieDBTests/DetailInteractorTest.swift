@@ -75,7 +75,7 @@ final class DetailInteractorTest: XCTestCase {
     let url = Bundle.theMovieDBService.url(forResource: "MovieContainer", withExtension: "momd")!
     let managedObjectModel =  NSManagedObjectModel(contentsOf: url)!
     let container = NSPersistentContainer(name: "MovieContainer", managedObjectModel: managedObjectModel)
-    let client = AuthenticatedHTTPClient(client: session, apiKey: APIConstans.apiKey)
+    let client = AuthenticatedHTTPClient(client: session, apiKey: API.key)
     let movieService = MovieServiceImpl(client: client)
     let coreDataClient = CoreDataClient(container: container)
     let favoriteService = FavoriteServiceImp(with: coreDataClient)

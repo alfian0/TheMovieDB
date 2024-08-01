@@ -1,0 +1,13 @@
+//
+//  Development.xcconfig
+//  TheMovieDB
+//
+//  Created by alfian on 01/08/24.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+API_BASE_URL =
+API_KEY =
+API_IMAGE_PLACEHOLDER =

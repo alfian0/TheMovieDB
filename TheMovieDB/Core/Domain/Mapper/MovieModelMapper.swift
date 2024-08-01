@@ -31,8 +31,8 @@ final class MovieModelMapper {
     return MovieModel(
       id: Int(entity.id),
       title: entity.title ?? "N/A",
-      backdropURL: URL(string: APIConstans.placeholderImageURLString)!,
-      posterURL: URL(string: APIConstans.placeholderImageURLString)!,
+      backdropURL: API.imageUrlPlaceholder,
+      posterURL: API.imageUrlPlaceholder,
       overview: entity.overview ?? "N/A",
       rating: "",
       score: "",
@@ -53,8 +53,7 @@ final class MovieModelMapper {
   }
 
   private static func createURL(with path: String?) -> URL {
-    let defaultURLString = APIConstans.placeholderImageURLString
-    guard let path = path else { return URL(string: defaultURLString)! }
+    guard let path = path else { return API.imageUrlPlaceholder }
     return URL(string: "https://image.tmdb.org/t/p/w500\(path)")!
   }
 
