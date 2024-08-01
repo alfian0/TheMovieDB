@@ -24,7 +24,7 @@ fi
 
 # Create and write to Debug.xcconfig
 echo "Creating Debug.xcconfig..."
-cat <<EOL > Debug.xcconfig
+cat <<EOL > ../TheMovieDB/Config/Debug.xcconfig
 API_KEY = $API_KEY
 API_BASE_URL = $API_BASE_URL
 API_IMAGE_PLACEHOLDER = $API_IMAGE_PLACEHOLDER
@@ -32,7 +32,7 @@ EOL
 
 # Create and write to Release.xcconfig
 echo "Creating Release.xcconfig..."
-cat <<EOL > Release.xcconfig
+cat <<EOL > ../TheMovieDB/Config/Release.xcconfig
 API_KEY = $API_KEY
 API_BASE_URL = $API_BASE_URL
 API_IMAGE_PLACEHOLDER = $API_IMAGE_PLACEHOLDER
