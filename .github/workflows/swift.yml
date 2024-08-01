@@ -33,8 +33,8 @@ jobs:
         -img "$API_IMAGE_PLACEHOLDER" \
     - name: Verify xcconfig files
       run: |
-        cat ../TheMovieDB/Config/Debug.xcconfig
-        cat ../TheMovieDB/Config/Release.xcconfig
+        cat TheMovieDB/Config/Debug.xcconfig
+        cat TheMovieDB/Config/Release.xcconfig
     - name: Install the Apple certificate and provisioning profile
       env:
         BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
