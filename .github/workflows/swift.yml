@@ -18,6 +18,9 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+    - name: Make script executable
+      run: |
+        chmod +x scripts/generate_xcconfig.sh
     - name: Set up environment
       env:
         API_KEY: ${{ secrets.API_KEY }}
