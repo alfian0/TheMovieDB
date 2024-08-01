@@ -7,6 +7,7 @@
 
 import UIKit
 import TheMovieDBCore
+import Firebase
 import FirebaseCore
 
 @main

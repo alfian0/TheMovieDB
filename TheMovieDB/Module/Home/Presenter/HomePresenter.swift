@@ -26,6 +26,9 @@ class HomePresenter: ObservableObject {
   init(usecase: HomeUseCase, coordinator: HomeCoordinator) {
     self.usecase = usecase
     self.coordinator = coordinator
+
+//    CrashManager.shared.setUserId(UUID().uuidString)
+//    fatalError()
   }
 
   deinit {
