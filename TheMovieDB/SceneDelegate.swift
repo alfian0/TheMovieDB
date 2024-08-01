@@ -12,7 +12,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   var window: UIWindow?
   var coordinator: Coordinator?
   var deepLinkManager: DeepLinkManager?
-  var analyticsManager: AnalyticsManager?
 
   func scene(
     _ scene: UIScene,
@@ -30,9 +29,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // Initialize the analytics manager
     initializeAnalyticsManager()
 
+    // Initialize the crash manager
+    initializeCrashManager()
+
     // Log app launch event
-    analyticsManager?.logEvent("app_launch", parameters: nil)
-    analyticsManager?.setUserId(UUID().uuidString)
+    DefaultAnalyticsManager.shared.logEvent("app_launch", parameters: nil)
+    DefaultAnalyticsManager.shared.setUserId(UUID().uuidString)
 
     // Handle any deep links from the launch options
     handleDeepLink(from: connectionOptions.userActivities)
@@ -66,10 +68,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   }
 
   private func initializeAnalyticsManager() {
-    let firebaseService = FirebaseAnalyticsService()
-    let mixpanelService = MixpanelAnalyticsService()
+    let analyticsServices: [AnalyticsService] = [
+        FirebaseAnalyticsService(),
+        MixpanelAnalyticsService()
+    ]
 
-    analyticsManager = DefaultAnalyticsManager(services: [firebaseService, mixpanelService])
+    DefaultAnalyticsManager.shared.updateServices(analyticsServices)
+  }
+
+  private func initializeCrashManager() {
+    let crashManagers: [CrashManager] = [
+        CrashlyticsManager(),
+        SentryManager()
+    ]
+
+    DefaultCrashManager.shared.updateServices(crashManagers)
   }
 
   private func handleDeepLink(from userActivities: Set<NSUserActivity>) {
