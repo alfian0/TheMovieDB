@@ -10,6 +10,7 @@ import TheMovieDBCore
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   var window: UIWindow?
+  var coordinator: Coordinator?
   var deepLinkManager: DeepLinkManager?
   var analyticsManager: AnalyticsManager?
 
@@ -44,13 +45,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   }
 
   private func initializeCoordinator(with windowScene: UIWindowScene) {
-    let mainCoordinator = MainCoordinator()
-    mainCoordinator.start()
-
+    let navigationController = UINavigationController()
     let window = UIWindow(windowScene: windowScene)
-    window.rootViewController = mainCoordinator.tabBarController
+    window.rootViewController = navigationController
     self.window = window
     window.makeKeyAndVisible()
+
+    self.coordinator = MainCoordinator(navigationController: navigationController)
+    self.coordinator?.start()
   }
 
   private func initializeDeepLinkManager() {

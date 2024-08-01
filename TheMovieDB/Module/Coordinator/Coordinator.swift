@@ -10,20 +10,24 @@ import SwiftUI
 import TheMovieDBCore
 import Podcast_App_Design_System
 
-final class MainCoordinator {
+final class MainCoordinator: Coordinator {
+  var navigationController: UINavigationController
   var childCoordinator: [Coordinator] = [Coordinator]()
-  var tabBarController: UITabBarController = {
-    let tabBarController = UITabBarController()
+  var tabBarController: UITabBarController
+
+  init(navigationController: UINavigationController) {
+    self.navigationController = navigationController
+    self.navigationController.setNavigationBarHidden(true, animated: false)
+
     let appearance = UITabBarAppearance()
     appearance.configureWithOpaqueBackground()
     appearance.backgroundColor = .white
-
-    tabBarController.tabBar.standardAppearance = appearance
+    self.tabBarController = UITabBarController()
+    self.tabBarController.tabBar.standardAppearance = appearance
     if #available(iOS 15.0, *) {
-      tabBarController.tabBar.scrollEdgeAppearance = appearance
+      self.tabBarController.tabBar.scrollEdgeAppearance = appearance
     }
-    return tabBarController
-  }()
+  }
 
   func start() {
     NotoSansFont.registerFonts()
@@ -71,5 +75,7 @@ final class MainCoordinator {
       searchCoordinator.navigationController,
       profileCoordinator.navigationController
     ]
+
+    self.navigationController.pushViewController(self.tabBarController, animated: false)
   }
 }
