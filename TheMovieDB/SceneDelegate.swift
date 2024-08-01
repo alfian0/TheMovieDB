@@ -36,6 +36,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     // Handle any deep links from the launch options
     handleDeepLink(from: connectionOptions.userActivities)
+
+//    deepLinkManager?.handleDeepLink(url: URL(string: "myapp://profile?name=Alfian")!)
   }
 
   func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -56,8 +58,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   }
 
   private func initializeDeepLinkManager() {
-    let productDeepLink = ProductDeepLink(url: URL(string: "myapp://product")!)
-    let profileDeepLink = ProfileDeepLink(url: URL(string: "myapp://profile")!)
+    guard let coordinator = self.coordinator else { return }
+    let productDeepLink = ProductDeepLink(path: "product", coordinator: coordinator)
+    let profileDeepLink = ProfileDeepLink(path: "profile", coordinator: coordinator)
 
     deepLinkManager = DefaultDeepLinkManager(deepLinks: [productDeepLink, profileDeepLink])
   }
