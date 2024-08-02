@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 import Podcast_App_Design_System
 import TheMovieDBService
+import TheMovieDBCore
 
 struct HomePageView: View {
   @ObservedObject var presenter: HomePresenter
@@ -75,6 +76,20 @@ struct HomePageView: View {
             }
         }
       }
+    }
+    .onAppear {
+      DefaultAnalyticsManager.shared.logEvent(
+        .screenView,
+        parameters: [
+          "screen_name": "HomePageView"
+        ]
+      )
+      DefaultAnalyticsManager.shared.logEvent(.sessionStart, parameters: nil)
+//      PerformanceManager.shared.startTrace(name: "performance_screen_time")
+    }
+    .onDisappear {
+      DefaultAnalyticsManager.shared.logEvent(.sessionEnd, parameters: nil)
+//      PerformanceManager.shared.stopTrace(name: "performance_screen_time")
     }
     .navigationBarTitle("The Movie DB")
     .navigationBarItems(trailing: ActivityIndicator(isAnimating: $presenter.isLoading))

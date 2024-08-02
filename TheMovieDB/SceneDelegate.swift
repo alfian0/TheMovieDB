@@ -33,7 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     initializeCrashManager()
 
     // Log app launch event
-    DefaultAnalyticsManager.shared.logEvent("app_launch", parameters: nil)
+    DefaultAnalyticsManager.shared.logEvent(.sessionStart, parameters: nil)
     DefaultAnalyticsManager.shared.setUserId(UUID().uuidString)
 
     // Handle any deep links from the launch options
@@ -70,7 +70,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   private func initializeAnalyticsManager() {
     let analyticsServices: [AnalyticsService] = [
         FirebaseAnalyticsService(),
-        MixpanelAnalyticsService()
+        MixpanelAnalyticsService(),
+        CrashlyticsAnalyticsService()
     ]
 
     DefaultAnalyticsManager.shared.updateServices(analyticsServices)
