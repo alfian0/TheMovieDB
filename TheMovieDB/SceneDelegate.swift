@@ -11,7 +11,6 @@ import TheMovieDBCore
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   var window: UIWindow?
   var coordinator: Coordinator?
-  var deepLinkManager: DeepLinkManager?
 
   func scene(
     _ scene: UIScene,
@@ -42,9 +41,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //    deepLinkManager?.handleDeepLink(url: URL(string: "myapp://profile?name=Alfian")!)
   }
 
+  func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+    guard let url = userActivity.webpageURL else { return }
+    DefaultDeepLinkManager.shared.handleDeepLink(url: url)
+  }
+
   func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
     if let url = URLContexts.first?.url {
-        deepLinkManager?.handleDeepLink(url: url)
+      DefaultDeepLinkManager.shared.handleDeepLink(url: url)
     }
   }
 
@@ -64,7 +68,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let productDeepLink = ProductDeepLink(path: "product", coordinator: coordinator)
     let profileDeepLink = ProfileDeepLink(path: "profile", coordinator: coordinator)
 
-    deepLinkManager = DefaultDeepLinkManager(deepLinks: [productDeepLink, profileDeepLink])
+    DefaultDeepLinkManager.shared.setDeepLinks([productDeepLink, profileDeepLink])
   }
 
   private func initializeAnalyticsManager() {
@@ -88,7 +92,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   private func handleDeepLink(from userActivities: Set<NSUserActivity>) {
     if let url = userActivities.first?.webpageURL {
-      deepLinkManager?.handleDeepLink(url: url)
+      DefaultDeepLinkManager.shared.handleDeepLink(url: url)
     }
   }
 }
